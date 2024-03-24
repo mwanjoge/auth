@@ -12,7 +12,7 @@ class UiServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -21,6 +21,7 @@ class UiServiceProvider extends ServiceProvider
                 UiCommand::class,
             ]);
         }
+
     }
 
     /**
@@ -28,8 +29,9 @@ class UiServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Route::mixin(new AuthRouteMethods);
+        $this->loadMigrationsFrom(__DIR__.'../database/migrations');
     }
 }

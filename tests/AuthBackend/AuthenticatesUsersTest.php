@@ -4,36 +4,50 @@ namespace Laravel\Ui\Tests\AuthBackend;
 
 use Illuminate\Auth\Events\Attempting;
 use Illuminate\Auth\Events\Logout;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Testing\TestResponse;
 use Illuminate\Validation\ValidationException;
 use Orchestra\Testbench\Attributes\WithMigration;
 use Orchestra\Testbench\Factories\UserFactory;
 use Orchestra\Testbench\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Spatie\Permission\Models\Role;
+use function Orchestra\Testbench\artisan;
 
 #[WithMigration]
 class AuthenticatesUsersTest extends TestCase
 {
     use AuthenticatesUsers, RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
+    /**
+     * @throws \Exception
+     */
     protected function tearDown(): void
     {
+
         Auth::logout();
 
         parent::tearDown();
     }
 
+    /**
+     * @throws \Exception
+     */
     #[Test]
     public function it_can_authenticate_a_user()
     {
         Event::fake();
-
         $user = UserFactory::new()->create();
 
         $request = Request::create('/login', 'POST', [
@@ -184,4 +198,5 @@ class AuthenticatesUsersTest extends TestCase
                 ->then($callback)
         );
     }
+
 }
