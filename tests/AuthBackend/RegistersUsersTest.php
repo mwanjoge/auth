@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui\Tests\AuthBackend;
+namespace Nisimpo\Ui\Tests\AuthBackend;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\User;

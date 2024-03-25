@@ -1,12 +1,12 @@
 <?php
 
-namespace Laravel\Ui\Tests\AuthBackend;
+namespace Nisimpo\Ui\Tests\AuthBackend;
 
 
 use Illuminate\Foundation\Auth\AuthorizeUserTrait;
 use Illuminate\Support\Facades\App;
-use Laravel\Ui\Services\AuthorizationService;
-use Laravel\Ui\Tests\TestCase;
+use Nisimpo\Ui\Services\AuthorizationService;
+use Nisimpo\Ui\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
 class AuthorizeUserTest extends TestCase

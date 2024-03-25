@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui\Services;
+namespace Nisimpo\Ui\Services;
 
 use Illuminate\Database\Eloquent\Model;
 

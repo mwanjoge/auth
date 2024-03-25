@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui\Tests\AuthBackend;
+namespace Nisimpo\Ui\Tests\AuthBackend;
 
 use Illuminate\Auth\Events\Attempting;
 use Illuminate\Auth\Events\Logout;

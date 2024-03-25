@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui\Tests;
+namespace Nisimpo\Ui\Tests;
 
 use Closure;
 use Illuminate\Cache\DatabaseStore;
@@ -11,9 +11,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
-use Laravel\Ui\Tests\TestModels\Admin;
-use Laravel\Ui\Tests\TestModels\Client;
-use Laravel\Ui\Tests\TestModels\User;
+use Nisimpo\Ui\Tests\TestModels\Admin;
+use Nisimpo\Ui\Tests\TestModels\Client;
+use Nisimpo\Ui\Tests\TestModels\User;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;

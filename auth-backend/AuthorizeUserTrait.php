@@ -2,7 +2,7 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use Laravel\Ui\Services\AuthorizationService;
+use Nisimpo\Ui\Facades\AuthorizationService;
 
 trait AuthorizeUserTrait
 {
@@ -10,6 +10,6 @@ trait AuthorizeUserTrait
     {
 //        $authorizationService = new AuthorizationService();
 //        $authorizationService->assignRoleToUser($this,$role);
-        \Laravel\Ui\Facades\AuthorizationService::assignRoleToUser($this,$role);
+        AuthorizationService::assignRoleToUser($this,$role);
     }
 }

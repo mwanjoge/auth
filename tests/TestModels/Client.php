@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui\Tests\TestModels;
+namespace Nisimpo\Ui\Tests\TestModels;
 
 class Client
 {

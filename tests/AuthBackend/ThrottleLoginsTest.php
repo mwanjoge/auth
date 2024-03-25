@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui\Tests\AuthBackend;
+namespace Nisimpo\Ui\Tests\AuthBackend;
 
 use Illuminate\Foundation\Auth\ThrottlesLogins as ThrottlesLoginsTrait;
 use Orchestra\Testbench\TestCase;

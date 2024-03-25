@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Ui;
+namespace Nisimpo\Ui;
 
 use Illuminate\Console\Command;
 use InvalidArgumentException;

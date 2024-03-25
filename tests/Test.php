@@ -1,5 +1,5 @@
 <?php
-namespace Laravel\Ui\Tests;
+namespace Nisimpo\Ui\Tests;
 class Test extends \Orchestra\Testbench\TestCase
 {
 
