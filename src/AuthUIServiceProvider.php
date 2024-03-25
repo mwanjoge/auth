@@ -5,7 +5,7 @@ namespace Nisimpo\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
-class AuthServiceProvider extends ServiceProvider
+class AuthUIServiceProvider extends ServiceProvider
 {
     /**
      * Register the package services.
