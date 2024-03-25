@@ -32,6 +32,6 @@ class UiServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::mixin(new AuthRouteMethods);
-        $this->loadMigrationsFrom(__DIR__.'../database/migrations');
+        //$this->loadMigrationsFrom(__DIR__.'../database/migrations');
     }
 }
