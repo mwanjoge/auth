@@ -1,6 +1,6 @@
 <?php
 
-namespace Nisimpo\Ui\Tests\AuthBackend;
+namespace Nisimpo\Auth\Tests\AuthBackend;
 
 use Illuminate\Foundation\Auth\ThrottlesLogins as ThrottlesLoginsTrait;
 use Orchestra\Testbench\TestCase;

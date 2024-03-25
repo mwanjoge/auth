@@ -1,12 +1,12 @@
 <?php
 
-namespace Nisimpo\Ui\Tests\AuthBackend;
+namespace Nisimpo\Auth\Tests\AuthBackend;
 
 
 use Illuminate\Foundation\Auth\AuthorizeUserTrait;
 use Illuminate\Support\Facades\App;
-use Nisimpo\Ui\Services\AuthorizationService;
-use Nisimpo\Ui\Tests\TestCase;
+use Nisimpo\Auth\Services\AuthorizationService;
+use Nisimpo\Auth\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
 class AuthorizeUserTest extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nisimpo\Ui\Services;
+namespace Nisimpo\Auth\Services;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Nisimpo\Ui\Tests;
+namespace Nisimpo\Auth\Tests;
 class Test extends \Orchestra\Testbench\TestCase
 {
 

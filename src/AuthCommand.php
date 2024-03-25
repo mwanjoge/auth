@@ -1,6 +1,6 @@
 <?php
 
-namespace Nisimpo\Ui;
+namespace Nisimpo\Auth;
 
 use Illuminate\Console\Command;
 use InvalidArgumentException;

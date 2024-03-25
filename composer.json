@@ -24,8 +24,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Nisimpo\\Ui\\": "src/",
-            "Nisimpo\\Ui\\Tests\\": "tests/",
+            "Nisimpo\\Auth\\": "src/",
+            "Nisimpo\\Auth\\Tests\\": "tests/",
             "Illuminate\\Foundation\\Auth\\": "auth-backend/"
         }
     },
@@ -38,7 +38,7 @@
         },
         "laravel": {
             "providers": [
-                "Nisimpo\\Ui\\UiServiceProvider"
+                "Nisimpo\\Auth\\UiServiceProvider"
             ]
         }
     },

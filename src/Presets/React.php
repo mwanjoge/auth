@@ -1,6 +1,6 @@
 <?php
 
-namespace Nisimpo\Ui\Presets;
+namespace Nisimpo\Auth\Presets;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;

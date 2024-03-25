@@ -1,6 +1,6 @@
 <?php
 
-namespace Nisimpo\Ui;
+namespace Nisimpo\Auth;
 
 class AuthRouteMethods
 {

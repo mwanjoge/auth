@@ -1,6 +1,6 @@
 <?php
 
-namespace Nisimpo\Ui\Facades;
+namespace Nisimpo\Auth\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -8,6 +8,6 @@ class AuthorizationService extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Nisimpo\Ui\Services\AuthorizationService::class;
+        return \Nisimpo\Auth\Services\AuthorizationService::class;
     }
 }
