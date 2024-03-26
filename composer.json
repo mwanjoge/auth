@@ -38,7 +38,7 @@
         },
         "laravel": {
             "providers": [
-                "AuthUIServiceProvider"
+                "Nisimpo\\Auth\\AuthUIServiceProvider"
             ]
         }
     },
