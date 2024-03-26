@@ -147,6 +147,13 @@ class AuthCommand extends Command
             file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
             FILE_APPEND
         );
+
+        if (! file_exists(base_path('routes/auth_routes.php'))) {
+            copy(
+                __DIR__.'/Auth/stubs/auth_routes.php',
+                base_path('routes/auth_routes.php')
+            );
+        }
     }
 
     /**
