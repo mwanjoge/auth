@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="login-container">
         <div class="row">
             <div class="col-md-12">
@@ -26,6 +25,7 @@
                             <div class="form-group mt-3">
                                 <label class="control-label" for="password">Password</label>
                                 <input type="password" title="Please enter your password" placeholder="******" required=""  value="" name="password" id="password" class="form-control  @error('password') is-invalid @enderror">
+<!--                                <span class="help-block small">Yur strong password</span>-->
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                         <strong class="is-invalid">{{ $message }}</strong>

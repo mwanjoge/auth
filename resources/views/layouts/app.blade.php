@@ -36,8 +36,8 @@
 
 </head>
 <body class="light-skin blank">
-
    @yield('content')
+
 
    <script src="{{ asset("vendor/jquery/dist/jquery.min.js") }}"></script>
    <script src="{{ asset("vendor/jquery-ui/jquery-ui.min.js") }}"></script>
