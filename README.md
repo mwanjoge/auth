@@ -57,7 +57,7 @@ php artisan ui react --auth
 }
 ```
 Add this to you `composer.json` file of a new laravel application to test your package development directly
-On the ur put the complete path of your package
+On the url replace the `/Users/bizytech/Herd/auth` with the complete path of your package directory
 
 #### CSS
 
