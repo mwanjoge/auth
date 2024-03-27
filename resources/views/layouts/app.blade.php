@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="{{ asset("vendor/fontawesome/css/font-awesome.css") }}" />
     <link rel="stylesheet" href="{{ asset("vendor/metisMenu/dist/metisMenu.css") }}" />
     <link rel="stylesheet" href="{{ asset("vendor/animate.css/animate.css") }}" />
-{{--    <link rel="stylesheet" href="{{ asset("vendor/bootstrap/dist/css/bootstrap.css") }}" />--}}
+    <link rel="stylesheet" href="{{ asset("vendor/bootstrap/dist/css/bootstrap.css") }}" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">--}}
 
     <!-- App styles -->
     <link rel="stylesheet" href="{{ asset("fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css") }}" />
@@ -26,16 +26,10 @@
 
     <link rel="stylesheet" href="{{ asset("styles/style.css") }}" />
 
-    <!-- Scripts -->
-    {{--@vite([
-          'resources/sass/app.scss',
-          'resources/js/app.js',
-          'resources/css/static_custom.css',
-          'resources/css/style.css'
-       ])--}}
 
 </head>
 <body class="light-skin blank">
+
    @yield('content')
 
 
