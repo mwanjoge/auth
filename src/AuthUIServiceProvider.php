@@ -21,6 +21,12 @@ class AuthUIServiceProvider extends ServiceProvider
                 UiCommand::class,
             ]);
         }
+
+        $this->registerRoutes();
+    }
+
+    protected function registerRoutes(){
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 
     /**
@@ -31,7 +37,7 @@ class AuthUIServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::mixin(new AuthRouteMethods);
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'layouts');
+        $this->loadViewsFrom(__DIR__.'/../resources/views','nisimpo');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/layouts'),

@@ -13,7 +13,7 @@
         "php": "^8.0",
         "illuminate/console": "^9.21|^10.0|^11.0",
         "illuminate/filesystem": "^9.21|^10.0|^11.0",
-        "illuminate/support": "^9.21|^10.0|^11.0",
+        "illuminate/support": "*",
         "illuminate/validation": "^9.21|^10.0|^11.0",
         "spatie/laravel-permission": "^6.4",
         "symfony/console": "^6.0|^7.0"
