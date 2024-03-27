@@ -40,7 +40,7 @@ class AuthUIServiceProvider extends ServiceProvider
 
         $this->publishes([__DIR__.'/../public' => base_path('public')], 'public');
 
-        //$this->loadMigrationsFrom(__DIR__.'../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'../database/migrations');
 
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations')
