@@ -31,15 +31,17 @@ class AuthUIServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::mixin(new AuthRouteMethods);
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'layouts');
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', '/');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/layouts'),
+            __DIR__.'/../resources/views' => resource_path('views'),
         ]);
 
         $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/'),
+            __DIR__.'/../public' => public_path('/'),
         ], 'public');
+
         //$this->loadMigrationsFrom(__DIR__.'../database/migrations');
     }
 }
