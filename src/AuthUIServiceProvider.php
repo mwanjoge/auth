@@ -21,7 +21,6 @@ class AuthUIServiceProvider extends ServiceProvider
                 UiCommand::class,
             ]);
         }
-
     }
 
     /**
@@ -32,6 +31,15 @@ class AuthUIServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Route::mixin(new AuthRouteMethods);
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'layouts');
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/layouts'),
+        ]);
+
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/'),
+        ], 'public');
         //$this->loadMigrationsFrom(__DIR__.'../database/migrations');
     }
 }
