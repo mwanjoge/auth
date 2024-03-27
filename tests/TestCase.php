@@ -231,12 +231,12 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
                 'uuid($pivotRole)->nullable(false)',
                 'uuid($pivotPermission)->nullable(false)',
             ],
-            file_get_contents(__DIR__.'/../database/migrations/create_permission_tables.php.stub')
+            file_get_contents(__DIR__.'/../database/migrations/create_permission_tables.stub')
         );
 
         file_put_contents(__DIR__.'/CreatePermissionCustomTables.php', $migration);
 
-        self::$migration = require __DIR__.'/../database/migrations/create_permission_tables.php.stub';
+        self::$migration = require __DIR__.'/../database/migrations/create_permission_tables.stub';
 
         self::$customMigration = require __DIR__.'/CreatePermissionCustomTables.php';
     }

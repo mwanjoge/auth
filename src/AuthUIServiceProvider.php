@@ -45,8 +45,7 @@ class AuthUIServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'../database/migrations');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_users_table.php' ,
-            database_path('migrations/'.date("Y_m_d_His").'_create_users_table.php')
+            __DIR__.'/../database/migrations/' => database_path('migrations')
         ], 'migrations');
 
     }
