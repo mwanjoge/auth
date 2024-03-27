@@ -1,2 +1,2 @@
 <?php
-Route::view('login','nisimpo::auth.login');
+Route::view('nisimpo/login','nisimpo::auth.login');
