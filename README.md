@@ -1,12 +1,12 @@
-# Laravel UI
+# Bizytech Auth Package
 
-<a href="https://packagist.org/packages/laravel/ui"><img src="https://img.shields.io/packagist/dt/laravel/ui" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/ui"><img src="https://img.shields.io/packagist/v/laravel/ui" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/ui"><img src="https://img.shields.io/packagist/l/laravel/ui" alt="License"></a>
+<a href="https://packagist.org/packages/nisimpo/auth"><img src="https://img.shields.io/packagist/dt/laravel/ui" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/nisimpo/auth"><img src="https://img.shields.io/packagist/v/laravel/ui" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/nisimpo/auth"><img src="https://img.shields.io/packagist/l/laravel/ui" alt="License"></a>
 
 ## Introduction
 
-While Laravel does not dictate which JavaScript or CSS pre-processors you use, it does provide a basic starting point using [Bootstrap](https://getbootstrap.com/), [React](https://reactjs.org/), and / or [Vue](https://vuejs.org/) that will be helpful for many applications. By default, Laravel uses [NPM](https://www.npmjs.org/) to install both of these frontend packages.
+This package does provide a basic starting point using [Bootstrap](https://getbootstrap.com/), [React](https://reactjs.org/), and / or [Vue](https://vuejs.org/) that will be helpful for many applications. By default, Laravel uses [NPM](https://www.npmjs.org/) to install both of these frontend packages.
 
 > This legacy package is a very simple authentication scaffolding built on the Bootstrap CSS framework. While it continues to work with the latest version of Laravel, you should consider using [Laravel Breeze](https://github.com/laravel/breeze) for new projects. Or, for something more robust, consider [Laravel Jetstream](https://github.com/laravel/jetstream).
 
@@ -28,10 +28,10 @@ Only the latest major version of Laravel UI receives bug fixes. The table below 
 The Bootstrap and Vue scaffolding provided by Laravel is located in the `laravel/ui` Composer package, which may be installed using Composer:
 
 ```bash
-composer require laravel/ui
+composer require nisimpo/auth:dev-main
 ```
 
-Once the `laravel/ui` package has been installed, you may install the frontend scaffolding using the `ui` Artisan command:
+Once the `nisimpo/auth` package has been installed, you may install the frontend scaffolding using the `ui` Artisan command:
 
 ```bash
 // Generate basic scaffolding...
@@ -44,6 +44,20 @@ php artisan ui bootstrap --auth
 php artisan ui vue --auth
 php artisan ui react --auth
 ```
+### Integrating with the package direct from vendor on development
+```json 
+"repositories": {
+  "dev-package": {
+    "type": "path",
+    "url": "/Users/bizytech/Herd/auth",
+    "options": {
+      "symlink": true
+    }
+  }
+}
+```
+Add this to you `composer.json` file of a new laravel application to test your package development directly
+On the ur put the complete path of your package
 
 #### CSS
 
@@ -55,7 +69,7 @@ Laravel does not require you to use a specific JavaScript framework or library t
 
 ### Writing CSS
 
-After installing the `laravel/ui` Composer package and [generating the frontend scaffolding](#introduction), Laravel's `package.json` file will include the `bootstrap` package to help you get started prototyping your application's frontend using Bootstrap. However, feel free to add or remove packages from the `package.json` file as needed for your own application. You are not required to use the Bootstrap framework to build your Laravel application - it is provided as a good starting point for those who choose to use it.
+After installing the `nisimpo/auth` Composer package and [generating the frontend scaffolding](#introduction), Laravel's `package.json` file will include the `bootstrap` package to help you get started prototyping your application's frontend using Bootstrap. However, feel free to add or remove packages from the `package.json` file as needed for your own application. You are not required to use the Bootstrap framework to build your Laravel application - it is provided as a good starting point for those who choose to use it.
 
 Before compiling your CSS, install your project's frontend dependencies using the [Node package manager (NPM)](https://www.npmjs.org):
 
