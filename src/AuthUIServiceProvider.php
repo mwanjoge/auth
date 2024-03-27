@@ -32,19 +32,22 @@ class AuthUIServiceProvider extends ServiceProvider
     {
         Route::mixin(new AuthRouteMethods);
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views', '/');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nisimpo/auth');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views'),
-        ],'bizytech-resource');
+        ],'resource');
 
-        $this->publishes([__DIR__.'/../public' => base_path('public')], 'public');
+        $this->publishes([
+            __DIR__.'/../public' => base_path('public')
+        ], 'public');
 
         $this->loadMigrationsFrom(__DIR__.'../database/migrations');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/' => database_path('migrations')
-        ], 'bizytech-migrations');
+            __DIR__.'/../database/migrations/create_users_table.php' ,
+            database_path('migrations/'.date("Y_m_d_His").'_create_users_table.php')
+        ], 'migrations');
 
     }
 }
