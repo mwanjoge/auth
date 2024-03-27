@@ -1,6 +1,19 @@
 <?php
 namespace Nisimpo\Auth\Tests;
-class Test extends \Orchestra\Testbench\TestCase
+class Test extends TestCase
 {
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        require_once __DIR__.'/../database/migrations/create_password_resets_table.php';
+
+
+    }
+
+    public function it_can_create_migration()
+    {
+
+    }
 }

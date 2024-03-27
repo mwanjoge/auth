@@ -38,9 +38,7 @@ class AuthUIServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views'),
         ]);*/
 
-        $this->publishes([
-            __DIR__.'/../public' => base_path('public')
-        ], 'public');
+        $this->publishes([__DIR__.'/../public' => base_path('public')], 'public');
 
         $this->loadMigrationsFrom(__DIR__.'../database/migrations');
 
