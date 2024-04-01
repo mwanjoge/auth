@@ -6,10 +6,34 @@ use Nisimpo\Auth\Facades\AuthorizationService;
 
 trait AuthorizeUserTrait
 {
-    public function assignRoleToUser($role)
+    public function createRoles(...$roles){
+        AuthorizationService::createRole($roles);
+    }
+    public function createPermissions(...$permissions){
+        AuthorizationService::createRole($permissions);
+    }
+    public function assignRoleToUser($role): void
     {
-//        $authorizationService = new AuthorizationService();
-//        $authorizationService->assignRoleToUser($this,$role);
         AuthorizationService::assignRoleToUser($this,$role);
     }
+    public function giveUserDirectPermissions(...$permissions){
+        AuthorizationService::assignDirectPermissionToUser($this, $permissions);
+    }
+    public function givePermissionToRole($role, array $permissions){
+        AuthorizationService::givePermissionsToRole($role, $permissions);
+    }
+    public function grantAllPermissionsToUser(){
+        AuthorizationService::grantAllPermissionToUser($this);
+    }
+
+    public function revokeAllPermissionToUser(){
+        AuthorizationService::revokeAllPermissionToUser($this);
+    }
+    public function findAllRoles(){
+        return AuthorizationService::findAllRoles();
+    }
+    public function findAllPermissions(){
+        return AuthorizationService::findAllPermissions();
+    }
+    public function findAllUsers(){}
 }

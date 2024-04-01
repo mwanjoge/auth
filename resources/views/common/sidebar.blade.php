@@ -41,9 +41,9 @@
             <li>
                 <a href="#"><span class="nav-label">User Management</span><span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="{{ route("manage-users.index") }}">Users</a></li>
-                    <li><a href="{{ route("manage-roles.index") }}">Roles</a></li>
-                    <li><a href="{{ route("manage-permissions.index") }}">Permissions</a></li>
+                    <li><a href="{{ route("users.index") }}">Users</a></li>
+                    <li><a href="{{ route("roles.index") }}">Roles</a></li>
+                    <li><a href="{{ route("permissions.index") }}">Permissions</a></li>
                 </ul>
             </li>
             <li>
