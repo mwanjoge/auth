@@ -14,7 +14,7 @@
                             @csrf
                             <div class="form-group mt-2">
                                 <label class="control-label" for="username">Username</label>
-                                <input type="text" placeholder="example@gmail.com" title="Please enter you username" required value="{{ old('email') }}" name="username" id="username" class="form-control  @error('email') is-invalid @enderror">
+                                <input type="text" placeholder="example@gmail.com" title="Please enter you username" required value="{{ old('email') }}" name="email" id="username" class="form-control  @error('email') is-invalid @enderror">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">

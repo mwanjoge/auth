@@ -49,11 +49,11 @@
             <li>
                 <a href="#"><span class="nav-label">Procurement</span><span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="{{ route("manage-users.index") }}">Warehouse</a></li>
-                    <li><a href="{{ route("manage-roles.index") }}">Requisition</a></li>
-                    <li><a href="{{ route("manage-permissions.index") }}">Purchase Order</a></li>
-                    <li><a href="{{ route("manage-permissions.index") }}">Stock Entry</a></li>
-                    <li><a href="{{ route("manage-permissions.index") }}">Loading Order</a></li>
+                    <li><a href="">Warehouse</a></li>
+                    <li><a href="">Requisition</a></li>
+                    <li><a href="">Purchase Order</a></li>
+                    <li><a href="">Stock Entry</a></li>
+                    <li><a href="">Loading Order</a></li>
                 </ul>
             </li>
 

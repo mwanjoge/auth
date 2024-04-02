@@ -10,7 +10,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('login', 'Nisimpo\Auth\Http\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Nisimpo\Auth\Http\Auth\LoginController@login');
     // your package routes
-    Route::group(['namespace' => 'Nisimpo\Auth\Http\Controllers\Auth'], function() {
+    Route::group(['namespace' => 'Nisimpo\Auth\Http\Auth'], function() {
         Route::post('logout', 'LoginController@logout')->name('logout');
 
         Route::get('register', 'RegisterController@showRegistrationForm')->name('register');

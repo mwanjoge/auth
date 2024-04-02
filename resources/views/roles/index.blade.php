@@ -43,7 +43,7 @@
                                     <ul class="dropdown-menu " aria-labelledby="dropdownMenu1">
                                         <li class="dropdown-header">Actions</li>
                                         <li>
-                                            <a href="{{ route("manage-roles.show",[0]) }}">
+                                            <a href="">
                                                 <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
                                             </a>
                                         </li>
