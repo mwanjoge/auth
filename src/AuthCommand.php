@@ -59,11 +59,11 @@ class AuthCommand extends Command
             throw new InvalidArgumentException('Invalid preset.');
         }
 
-        $this->ensureDirectoriesExist();
-        $this->exportViews();
+        //$this->ensureDirectoriesExist();
+        //$this->exportViews();
 
         if (! $this->option('views')) {
-            $this->exportBackend();
+            //$this->exportBackend();
         }
 
         $this->components->info('Authentication scaffolding generated successfully.');
@@ -113,54 +113,54 @@ class AuthCommand extends Command
      */
     protected function exportBackend()
     {
-//        $this->callSilent('ui:controllers');
-//
-//        $controller = app_path('Http/Controllers/HomeController.php');
-//
-//        if (file_exists($controller) && ! $this->option('force')) {
-//            if ($this->components->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
-//                file_put_contents($controller, $this->compileStub('controllers/HomeController'));
-//            }
-//        } else {
-//            file_put_contents($controller, $this->compileStub('controllers/HomeController'));
-//        }
-//
-//        $baseController = app_path('Http/Controllers/Controller.php');
-//
-//        if (file_exists($baseController) && ! $this->option('force')) {
-//            if ($this->components->confirm("The [Controller.php] file already exists. Do you want to replace it?")) {
-//                file_put_contents($baseController, $this->compileStub('controllers/Controller'));
-//            }
-//        } else {
-//            file_put_contents($baseController, $this->compileStub('controllers/Controller'));
-//        }
-//
-//        if (! file_exists(database_path('migrations/create_users_table.stub'))) {
-//            copy(
-//                __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
-//                base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
-//            );
-//        }
-//
-//        if (! file_exists(database_path('migrations/create_users_table.stub'))) {
-//            copy(
-//                __DIR__.'/../stubs/migrations/0001_01_01_000000_create_users_table.php',
-//                base_path('database/migrations/0001_01_01_000000_create_users_table.php')
-//            );
-//        }
-//
-//        file_put_contents(
-//            base_path('routes/web.php'),
-//            file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
-//            FILE_APPEND
-//        );
-//
-//        if (! file_exists(base_path('routes/auth_routes.php'))) {
-//            copy(
-//                __DIR__.'/Auth/stubs/auth_routes.php',
-//                base_path('routes/auth_routes.php')
-//            );
-//        }
+        $this->callSilent('ui:controllers');
+
+        $controller = app_path('Http/Controllers/HomeController.php');
+
+        if (file_exists($controller) && ! $this->option('force')) {
+            if ($this->components->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
+                file_put_contents($controller, $this->compileStub('controllers/HomeController'));
+            }
+        } else {
+            file_put_contents($controller, $this->compileStub('controllers/HomeController'));
+        }
+
+        $baseController = app_path('Http/Controllers/Controller.php');
+
+        if (file_exists($baseController) && ! $this->option('force')) {
+            if ($this->components->confirm("The [Controller.php] file already exists. Do you want to replace it?")) {
+                file_put_contents($baseController, $this->compileStub('controllers/Controller'));
+            }
+        } else {
+            file_put_contents($baseController, $this->compileStub('controllers/Controller'));
+        }
+
+        if (! file_exists(database_path('migrations/create_users_table.stub'))) {
+            copy(
+                __DIR__.'/../stubs/migrations/2014_10_12_100000_create_password_resets_table.php',
+                base_path('database/migrations/2014_10_12_100000_create_password_resets_table.php')
+            );
+        }
+
+        if (! file_exists(database_path('migrations/create_users_table.stub'))) {
+            copy(
+                __DIR__.'/../stubs/migrations/0001_01_01_000000_create_users_table.php',
+                base_path('database/migrations/0001_01_01_000000_create_users_table.php')
+            );
+        }
+
+        file_put_contents(
+            base_path('routes/web.php'),
+            file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
+            FILE_APPEND
+        );
+
+        if (! file_exists(base_path('routes/auth_routes.php'))) {
+            copy(
+                __DIR__.'/Auth/stubs/auth_routes.php',
+                base_path('routes/auth_routes.php')
+            );
+        }
     }
 
     /**
