@@ -21,19 +21,17 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function __construct(
-        protected AuthorizationService $authorizationService,
+    public function __construct(protected AuthorizationService $authorizationService,
         protected UserManagementService $userManagementService)
     {
         $this->middleware('auth');
     }
-    public function index(): View
-    {
+    public function index(): View {
         $users = $this->userManagementService->findAllUsers();
-        return view('nisimpo::users.show',compact('users'));
+        return view('nisimpo::users.index',compact('users'));
     }
 
-    public function roles():View{
+    public function roles():View {
         $roles = $this->findAllRoles();
         return view('nisimpo::roles.index', compact('roles'));
     }
@@ -85,4 +83,9 @@ class UserController extends Controller
         return back();
     }
 
+    public function showUser(string $id){
+        $roles = $this->findAllRoles();
+        $user = $this->userManagementService->findUser($id);
+        return view('nisimpo::users.show',compact("user","roles"));
+    }
 }

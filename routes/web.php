@@ -1,7 +1,7 @@
 <?php
 //Route::view('nisimpo/register','nisimpo::auth.register');
 Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
-    Route::get('nisimpo/register', 'RegisterController@showRegistrationForm')->name('register');
+    Route::get('nisimpo/register', 'RegisterController@showRegistrationForm')->name('nisimpo.register');
 });
 //Route::get('','Nisimpo\Auth\Http\Controllers\UserController@index');
 
@@ -28,8 +28,11 @@ Route::middleware(['web'])->group(function () {
         Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
         Route::post('email/resend', 'VerificationController@resend')->name('verification.resend');
     });
+
     Route::get('/home', [\Nisimpo\Auth\Http\Controllers\UserController::class, 'index'])->name('home');
     Route::get('roles',[\Nisimpo\Auth\Http\Controllers\UserController::class,'roles'])->name('roles.index');
     Route::get('permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'permissions'])->name('permissions.index');
     Route::get('users',[\Nisimpo\Auth\Http\Controllers\UserController::class,'users'])->name('users.index');
+    Route::get('user/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'showUser'])->name('user.show');
+
 });

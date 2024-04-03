@@ -43,5 +43,42 @@
        <!-- App scripts -->
        <script type="text/javascript" src="{{ asset("vendor/homer/scripts/homer.js") }}"></script>
 
+      <style type="text/css">
+
+          .margin-bottom {
+              margin-bottom: 10px;
+          }
+          .permission_title , .a_permission{
+              display: flex;
+              align-items: center;
+          }
+
+          .permission_title span{
+              margin-left: 5px;
+              font-size: 17px;
+              font-weight: bold;
+              padding: 0;
+          }
+
+          .a_permission span{
+              margin-left: 5px;
+              font-size: 15px;
+              font-weight: normal;
+              padding: 0;
+          }
+
+          @media (max-width: 767px) {
+              .table-responsive .dropdown-menu {
+                  position: static !important;
+              }
+          }
+          @media (min-width: 768px) {
+              .table-responsive {
+                  overflow: inherit;
+              }
+          }
+
+      </style>
+
 </body>
 </html>

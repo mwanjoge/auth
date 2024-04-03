@@ -9,9 +9,12 @@ use Spatie\Permission\Models\Role;
 
 class UserManagementService
 {
-    public function findAllUsers(): Collection
-    {
+    public function findAllUsers(): Collection {
         return User::all();
+    }
+
+    public function findUser($id) {
+        return User::find($id);
     }
 
 }

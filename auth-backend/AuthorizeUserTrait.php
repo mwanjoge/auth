@@ -16,9 +16,12 @@ trait AuthorizeUserTrait
     {
         AuthorizationService::assignRoleToUser($this,$role);
     }
+
     public function giveUserDirectPermissions(...$permissions){
         AuthorizationService::assignDirectPermissionToUser($this, $permissions);
     }
+
+
     public function givePermissionToRole($role, array $permissions){
         AuthorizationService::givePermissionsToRole($role, $permissions);
     }
@@ -29,6 +32,7 @@ trait AuthorizeUserTrait
     public function revokeAllPermissionToUser(){
         AuthorizationService::revokeAllPermissionToUser($this);
     }
+
     public function findAllRoles(){
         return AuthorizationService::findAllRoles();
     }

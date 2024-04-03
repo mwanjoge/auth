@@ -22,11 +22,11 @@
                                   <div class="panel-body">
                                       <div style="display: flex; flex-direction: column; align-items: center;">
                                           <img src="{{ asset("images/profile.jpg") }}" class="img-circle" alt="logo">
-                                          <h3 class="p-0 m-0">Said Khamis</h3>
-                                          <h4 class="p-0 m-0 text-success">ACTIVE</h4>
+                                          <h3 class="p-0 m-0">{{ $user->full_name }}</h3>
+                                          <h4 class="p-0 m-0 text-success">{{ $user->is_active ? "ACTIVE" : "INACTIVE" }} </h4>
                                           <div class="row mt-3">
-                                              <button class="btn btn-primary">Edit</button>
-                                              <button class="btn btn-danger">Delete</button>
+                                              <a class="btn btn-primary" href="{{ $user->id }}">Edit</a>
+                                              <a class="btn btn-danger" href="{{ $user->id }}">Delete</a>
                                           </div>
                                       </div>
                                   </div>
@@ -38,51 +38,17 @@
                                <div class="panel-body">
                                    <div class="panel-title">ASSIGN ROLE</div>
                                    <div class="row" style="margin-top: 15px;">
-                                       <div class="col-sm-4">
-                                           <div class="a_permission">
-                                               <input type="checkbox" class="form-check m-r-n-sm"/>
-                                               <div class="nav-divider"></div>
-                                               <span>super admin</span>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-4">
-                                           <div class="a_permission">
-                                               <input type="checkbox" class="form-check m-r-n-sm"/>
-                                               <div class="nav-divider"></div>
-                                               <span>procurement office</span>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-4">
-                                           <div class="a_permission">
-                                               <input type="checkbox" class="form-check m-r-n-sm"/>
-                                               <div class="nav-divider"></div>
-                                               <span>agriculture expert</span>
-                                           </div>
-                                       </div>
-                                   </div>
-
-                                   <div class="row" style="margin-top: 15px;">
-                                       <div class="col-sm-4">
-                                           <div class="a_permission">
-                                               <input type="checkbox" class="form-check m-r-n-sm"/>
-                                               <div class="nav-divider"></div>
-                                               <span>view dashboard</span>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-4">
-                                           <div class="a_permission">
-                                               <input type="checkbox" class="form-check m-r-n-sm"/>
-                                               <div class="nav-divider"></div>
-                                               <span>view dashboard</span>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-4">
-                                           <div class="a_permission">
-                                               <input type="checkbox" class="form-check m-r-n-sm"/>
-                                               <div class="nav-divider"></div>
-                                               <span>view dashboard</span>
-                                           </div>
-                                       </div>
+                                       @if(count($roles) > 0)
+                                           @foreach($roles as $role)
+                                               <div class="col-sm-4">
+                                                   <div class="a_permission">
+                                                       <input type="checkbox"  class="form-check m-r-n-sm"/>
+                                                       <div class="nav-divider"></div>
+                                                       <span>{{ $role->name }}</span>
+                                                   </div>
+                                               </div>
+                                           @endforeach
+                                       @endif
                                    </div>
 
                                </div>
