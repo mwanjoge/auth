@@ -33,7 +33,7 @@ class AuthorizationService
 
     public function assignRoleToUser(mixed $user, ...$role): void
     {
-        $user->syncRole($role);
+        $user->syncRoles($role);
     }
 
     public function assignDirectPermissionToUser(mixed $user, ...$permissions): void
