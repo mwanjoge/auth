@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('nisimpo::layouts.app')
 
 @section('content')
     <div class="">
