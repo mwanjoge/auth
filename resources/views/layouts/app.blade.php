@@ -18,13 +18,16 @@
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/animate.css/animate.css") }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/bootstrap/dist/css/bootstrap.css") }}" />
 
-{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">--}}
+
+
+    {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">--}}
 
     <!-- App styles -->
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css") }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/fonts/pe-icon-7-stroke/css/helper.css") }}" />
 
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/styles/style.css") }}" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
 
 
 </head>
@@ -42,6 +45,9 @@
 
        <!-- App scripts -->
        <script type="text/javascript" src="{{ asset("vendor/homer/scripts/homer.js") }}"></script>
+
+{{--       <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>--}}
+       <script type="text/javascript" src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 
       <style type="text/css">
 
@@ -79,6 +85,8 @@
           }
 
       </style>
+
+      @yield("scripts")
 
 </body>
 </html>

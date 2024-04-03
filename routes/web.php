@@ -31,8 +31,12 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('/home', [\Nisimpo\Auth\Http\Controllers\UserController::class, 'index'])->name('home');
     Route::get('roles',[\Nisimpo\Auth\Http\Controllers\UserController::class,'roles'])->name('roles.index');
+    Route::get('role/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'showRole'])->name('role.show');
     Route::get('permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'permissions'])->name('permissions.index');
-    Route::get('users',[\Nisimpo\Auth\Http\Controllers\UserController::class,'users'])->name('users.index');
+    Route::get('users',[\Nisimpo\Auth\Http\Controllers\UserController::class,'index'])->name('users.index');
     Route::get('user/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'showUser'])->name('user.show');
+
+
+    Route::post('assign-user-permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'givePermissionsToUser'])->name('user.permissions');
 
 });

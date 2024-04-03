@@ -25,18 +25,18 @@
                     </div>
                     <div class="container-fluid">
                         <div class="table-responsive  mt-3">
-                            <table  class="table  table-striped">
+                            <table  class="table  table-striped" id="tableUsers">
                                 <thead>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Full Name</th>
-                                    <th>Gender</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Full Name</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
+                                  {{--@foreach($users as $user)
                                     <tr>
                                         <td>{{$loop->iteration }}</td>
                                         <td>{{$user->full_name}}</td>
@@ -68,7 +68,7 @@
                                         </td>
 
                                     </tr>
-                                @endforeach
+                                @endforeach--}}
                                 </tbody>
                             </table>
                             <!--
@@ -101,6 +101,37 @@
         </div>
 
     </div>
+@endsection
+
+@section("scripts")
+     <script type="text/javascript">
+          $(function (){
+              const tableUsers = $('#tableUsers').DataTable({
+                  processing: true,
+                  serverSide: true,
+                  ajax: {
+                      url: '{{ route("users.index") }}',
+                      type: 'GET'
+                  },
+                  columns: [
+                      {data: 'id', name: 'id'},
+                      {data: 'full_name', name: 'full_name'},
+                      {data: 'email', name: 'email'},
+                      {data: 'gender', name: 'gender'},
+                      {data: 'action', name: 'action'},
+                      /*   {
+                          data: 'action',
+                          name: 'action',
+                          orderable: false,
+                          searchable: false,
+                          render: function(data, type, row) {
+                              return data;
+                          }
+                      },*/
+                  ],
+              });
+          })
+     </script>
 @endsection
 
 

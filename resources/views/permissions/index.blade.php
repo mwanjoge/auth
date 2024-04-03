@@ -14,6 +14,7 @@
         <div id="wrapper">
 
             <div class="content col">
+
                 <div class="row">
                     <div class="col-sm-6">
                         <h1 class="p-0 m-0">Permissions</h1>
@@ -23,7 +24,7 @@
                     </div>
                 </div>
                 <div class="table-responsive w-100">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="tablePermissions">
                         <thead>
                         <tr>
                             <th>S/N</th>
@@ -33,7 +34,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                          @if(count($permissions) > 0)
+                          {{--@if(count($permissions) > 0)
                             @foreach($permissions as $permission)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -57,7 +58,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        @endif
+                        @endif--}}
                         </tbody>
                     </table>
                 </div>
@@ -66,6 +67,37 @@
         </div>
 
     </div>
+@endsection
+
+@section("scripts")
+    <script type="text/javascript">
+        $(function (){
+
+            const tableUsers = $('#tablePermissions').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route("permissions.index") }}',
+                    type: 'GET'
+                },
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'guard_name', name: 'guard_name'},
+                    {data: 'action', name: 'action'},
+                    /*   {
+                           data: 'action',
+                           name: 'action',
+                           orderable: false,
+                           searchable: false,
+                           render: function(data, type, row) {
+                               return data;
+                           }
+                       },*/
+                ],
+            });
+        })
+    </script>
 @endsection
 
 

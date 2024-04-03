@@ -76,4 +76,14 @@ class AuthorizationService
     {
         return Permission::all();
     }
+
+    public function findRole($id)
+    {
+        return Role::find($id);
+    }
+
+    public function revokePermissionFromUser($user, $permission)
+    {
+        $user->revokePermissionTo($permission);
+    }
 }

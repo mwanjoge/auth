@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="table-responsive w-100">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="tableRoles">
                         <thead>
                            <tr>
                                <th>S/N</th>
@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
 
-                         @if(count($roles) > 0)
+                         {{--@if(count($roles) > 0)
                             @foreach($roles as $role)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -46,7 +46,7 @@
                                             <ul class="dropdown-menu " aria-labelledby="dropdownMenu1">
                                                 <li class="dropdown-header">Actions</li>
                                                 <li>
-                                                    <a href="{{ route("manage-roles.show",[ $role->id ]) }}">
+                                                    <a href="">
                                                         <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
                                                     </a>
                                                 </li>
@@ -58,7 +58,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        @endif
+                        @endif--}}
 
                         </tbody>
                     </table>
@@ -69,5 +69,37 @@
 
     </div>
 @endsection
+
+@section("scripts")
+    <script type="text/javascript">
+        $(function (){
+
+            const tableUsers = $('#tableRoles').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route("roles.index") }}',
+                    type: 'GET'
+                },
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'guard_name', name: 'guard_name'},
+                    {data: 'action', name: 'action'},
+                    /*   {
+                           data: 'action',
+                           name: 'action',
+                           orderable: false,
+                           searchable: false,
+                           render: function(data, type, row) {
+                               return data;
+                           }
+                       },*/
+                ],
+            });
+        })
+    </script>
+@endsection
+
 
 
