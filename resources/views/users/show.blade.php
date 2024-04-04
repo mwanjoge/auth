@@ -41,7 +41,7 @@
                                        @if(count($roles) > 0)
                                            @foreach($roles as $role)
                                                <div class="col-sm-4">
-                                                   <div class="a_permission">
+                                                   <div class="a_role" data-role="{{ $role->name }}">
                                                        <input type="checkbox" {{ $user->hasRole($role->name) ? 'checked' : '' }} class="form-check m-r-n-sm"/>
                                                        <div class="nav-divider"></div>
                                                        <span>{{ $role->name }}</span>
@@ -62,7 +62,7 @@
                                               @foreach($modules_permissions as $permission)
                                                   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                                       <div class="permission_title margin-bottom" data-id="{{ $permission->id }}">
-                                                          <input type="checkbox" class="form-check m-r-n-sm"/>
+                                                          <input type="checkbox" class="form-check m-r-n-sm" disabled/>
                                                           <span>{{ $permission->name }}</span>
                                                       </div>
                                                       @if(count($permission->permissions) > 0)
@@ -96,12 +96,6 @@
      <script type="text/javascript">
          $(function () {
 
-             $.ajaxSetup({
-                 headers: {
-                     'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
-                 }
-             });
-
              $(document).on("click", ".a_permission input[type='checkbox']", function () {
                  const permission = $(this).closest('.a_permission').data("permission");
                  const user_id = "{{ $user->id }}";
@@ -119,10 +113,43 @@
                      dataType: "json",
                      data: JSON.stringify(data),
                      success: function (response) {
-                         console.log(response);
+                         if(response.status === true){
+                             toastr.success(response.message);
+                         }
                      },
                      error: function (error) {
                          console.log(error);
+                         const anError = error.responseJSON.message;
+                         toastr.error(anError);
+                     }
+                 })
+             })
+
+             $(document).on("click", ".a_role input[type='checkbox']", function () {
+                 const permission = $(this).closest('.a_role').data("role");
+                 const user_id = "{{ $user->id }}";
+                 const isChecked = $(this).prop('checked');
+
+                 const data = {
+                     "role": permission,
+                     "user_id": user_id,
+                     "isChecked": isChecked
+                 };
+
+                 $.ajax({
+                     url: "{{ route("user.role") }}",
+                     method: "POST",
+                     dataType: "json",
+                     data: JSON.stringify(data),
+                     success: function (response) {
+                         if(response.status === true){
+                             toastr.success(response.message);
+                         }
+                     },
+                     error: function (error) {
+                         console.log(error);
+                         const anError = error.responseJSON.message;
+                         toastr.error(anError);
                      }
                  })
              })

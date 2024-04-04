@@ -17,6 +17,8 @@
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/metisMenu/dist/metisMenu.css") }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/animate.css/animate.css") }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/bootstrap/dist/css/bootstrap.css") }}" />
+    <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.css") }}" />
+    <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.css") }}" />
 
 
 
@@ -43,6 +45,8 @@
        <script type="text/javascript" src="{{ asset("vendor/homer/vendor/iCheck/icheck.min.js") }}"></script>
        <script type="text/javascript" src="{{ asset("vendor/homer/vendor/sparkline/index.js") }}"></script>
 
+      <script src="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.min.js") }}"></script>
+      <script src="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.js") }}"></script>
        <!-- App scripts -->
        <script type="text/javascript" src="{{ asset("vendor/homer/scripts/homer.js") }}"></script>
 
@@ -54,7 +58,7 @@
           .margin-bottom {
               margin-bottom: 10px;
           }
-          .permission_title , .a_permission{
+          .permission_title , .a_permission , .a_role{
               display: flex;
               align-items: center;
           }
@@ -73,6 +77,13 @@
               padding: 0;
           }
 
+          .a_role span{
+              margin-left: 5px;
+              font-size: 15px;
+              font-weight: normal;
+              padding: 0;
+          }
+
           @media (max-width: 767px) {
               .table-responsive .dropdown-menu {
                   position: static !important;
@@ -84,8 +95,47 @@
               }
           }
 
+          .error-message{
+              color: red;
+          }
+
       </style>
 
+      <script type="text/javascript">
+          $(function (){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
+                  }
+              });
+
+
+              // Toastr options
+              toastr.options = {
+                  "debug": false,
+                  "newestOnTop": false,
+                  "positionClass": "toast-top-right",
+                  "closeButton": true,
+                  "toastClass": "animated fadeInDown",
+              };
+
+              $('.homerDemo1').click(function (){
+                  toastr.info('Info - This is a custom Homer info notification');
+              });
+
+              $('.homerDemo2').click(function (){
+                  toastr.success('Success - This is a Homer success notification');
+              });
+
+              $('.homerDemo3').click(function (){
+                  toastr.warning('Warning - This is a Homer warning notification');
+              });
+
+              $('.homerDemo4').click(function (){
+                  toastr.error('Error - This is a Homer error notification');
+              });
+          })
+      </script>
       @yield("scripts")
 
 </body>

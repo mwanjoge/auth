@@ -21,7 +21,7 @@
                                 <div class="hpanel">
                                     <div class="panel-body">
                                         <div style="display: flex; flex-direction: column; align-items: center;">
-                                            <h3 class="p-0 m-0">{{ $role->name }}</h3>
+                                            <h3 class="p-0 m-0">{{ $module->name }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -33,17 +33,27 @@
                                     <div class="panel-title">ASSIGN PERMISSIONS</div>
 
                                     <div class="row" style="margin-top: 15px;">
-                                        @if( $modules_permissions != null)
+                                         @if(count($permissions) > 0)
+                                             @foreach($permissions as $permission)
+                                                <div class="col-md-4">
+                                                    <div class="a_permission margin-bottom" data-permission = '{{ $permission->name }}'>
+                                                        <input type="checkbox" class="form-check m-r-n-sm" {{ $module->permissions->contains( "name" , $permission->name) ? 'checked' : ' '}} />
+                                                        <span>{{ $permission->name }}</span>
+                                                    </div>
+                                                </div>
+                                             @endforeach
+                                         @endif
+                                        {{--@if( $modules_permissions != null)
                                             @if(count($modules_permissions) > 0)
                                                 @foreach($modules_permissions as $permission)
                                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                                         <div class="permission_title margin-bottom">
-                                                            <input type="checkbox" class="form-check m-r-n-sm" disabled/>
+                                                            <input type="checkbox" class="form-check m-r-n-sm"/>
                                                             <span>{{ $permission->name }}</span>
                                                         </div>
                                                         @if(count($permission->permissions) > 0)
                                                             @foreach($permission->permissions as $perm)
-                                                                <div class="a_permission" data-permission="{{ $perm->name }}">
+                                                                <div class="a_permission">
                                                                     <input type="checkbox" class="form-check m-r-n-sm" {{ $role->hasPermissionTo($perm->name) ? 'checked' : '' }}/>
                                                                     <div class="nav-divider"></div>
                                                                     <span>{{ $perm->name }}</span>
@@ -54,7 +64,7 @@
                                                     </div>
                                                 @endforeach
                                             @endif
-                                        @endif
+                                        @endif--}}
                                     </div>
 
                                 </div>
@@ -75,19 +85,17 @@
 
             $(document).on("click", ".a_permission input[type='checkbox']", function () {
                 const permission = $(this).closest('.a_permission').data("permission");
-                const role_id = "{{ $role->id }}";
+                const module_id = "{{ $module->id }}";
                 const isChecked = $(this).prop('checked');
 
                 const data = {
                     "permission": permission,
-                    "role_id": role_id,
+                    "module_id": module_id,
                     "isChecked": isChecked
                 };
 
-                console.log(data);
-
                 $.ajax({
-                    url: "{{ route("role.permissions") }}",
+                    url: "{{ route("group.permissions") }}",
                     method: "POST",
                     dataType: "json",
                     data: JSON.stringify(data),
@@ -103,11 +111,11 @@
                     }
                 })
             })
+
         });
 
     </script>
 @endsection
-
 
 
 
