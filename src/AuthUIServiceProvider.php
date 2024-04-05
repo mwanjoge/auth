@@ -53,5 +53,13 @@ class AuthUIServiceProvider extends ServiceProvider
 //            __DIR__.'/../database/migrations/' => database_path('migrations')
 //        ], 'migrations');
 
+        $this->seeding();
+    }
+
+    public function seeding()
+    {
+        $this->publishes([
+            __DIR__.'/../database/seeders/' => database_path('seeders')
+        ], 'seeders');
     }
 }
