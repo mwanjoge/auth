@@ -142,7 +142,7 @@ class AuthCommand extends Command
             );
         }
 
-        if (! file_exists(database_path('migrations/create_users_table.stub'))) {
+        if ( file_exists(database_path('migrations/create_users_table.stub'))) {
             copy(
                 __DIR__.'/../stubs/migrations/0001_01_01_000000_create_users_table.php',
                 base_path('database/migrations/0001_01_01_000000_create_users_table.php')
