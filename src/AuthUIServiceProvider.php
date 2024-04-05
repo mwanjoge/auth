@@ -39,13 +39,13 @@ class AuthUIServiceProvider extends ServiceProvider
         Route::mixin(new AuthRouteMethods);
         $this->loadViewsFrom(__DIR__.'/../resources/views','nisimpo');
         $this->registerRoutes();
+
 //        $this->publishes([
 //            __DIR__.'/../resources/views' => resource_path('views'),
 //        ],'resource');
 
-        $this->publishes([
-            __DIR__.'/../public' => base_path('public')
-        ], 'public');
+        $this->publishes([__DIR__.'/../public' => base_path('public')],
+            'public');
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
