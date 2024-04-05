@@ -10,6 +10,8 @@
 
         @include("nisimpo::common.sidebar")
 
+        @include("nisimpo::users.add_user_modal")
+
         <!-- Main Wrapper -->
         <div id="wrapper">
 
@@ -20,7 +22,7 @@
                             <h1 class="p-0 m-0">Users</h1>
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" style="float: right;">Add</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#userModal" style="float: right;">Add</button>
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -130,7 +132,121 @@
                       },*/
                   ],
               });
-          })
+
+              const full_name_error = $("#full-name-error");
+              const gender_error = $("#gender-error");
+              const user_type_error = $("#user-type-error");
+              const email_error = $("#email-error");
+              const username_error = $("#username-error");
+              const password_error = $("#password-error");
+
+              full_name_error.hide();
+              gender_error.hide();
+              user_type_error.hide();
+              email_error.hide();
+              username_error.hide();
+              password_error.hide();
+
+              const fullName = $("#full_name");
+              const gender = $("#gender");
+              const userType = $("#user_type");
+              const email = $("#email");
+              const username = $("#username");
+              const password = $("#password");
+
+              $(document).on("click","#addUserBtn", function (e){
+                  e.preventDefault();
+
+                  if( validateFullName() ){
+                      full_name_error.show();
+                  }else if( validateGender() ){
+                      gender_error.show();
+                  }else if( validateUserType() ){
+                      user_type_error.show();
+                  }else  if( validateEmail() ){
+                      email_error.show();
+                  }else if( validateUsername() ){
+                      username_error.show();
+                  }else if( validatePassword() ){
+                      password_error.show();
+                  }else {
+                      const data = {
+                          "full_name" : fullName.val(),
+                          "gender" : gender.val(),
+                          "user_type" : userType.val(),
+                          "email" : email.val(),
+                          "username" : username.val(),
+                          "password" : password.val()
+                      }
+
+                      console.log("Data");
+                      console.log(data);
+                  }
+              });
+
+              $(document).on("keyup","#full_name, #username , #email , #password", function (){
+                   const data = $(this);
+                   console.log("Data");
+                   console.log(data);
+                   const id = data[0].id;
+                   if( id === "full_name"){
+                        if( validateFullName() ){
+                            full_name_error.show();
+                        }else {
+                            full_name_error.hide();
+                        }
+                   }
+
+                   if( id === "username"){
+                        if( validateUsername() ){
+                            username_error.show();
+                        }else {
+                            username_error.hide();
+                        }
+                   }
+
+                  if( id === "email"){
+                      if( validateEmail() ){
+                          email_error.show();
+                      }else {
+                          email_error.hide();
+                      }
+                  }
+
+                  if( id === "password"){
+                      if( validatePassword() ){
+                          password_error.show();
+                      }else {
+                          password_error.hide();
+                      }
+                  }
+              });
+
+              function validateFullName(){
+                  return fullName.val() === "";
+              }
+
+              function validateGender(){
+                  return gender.val() === "";
+              }
+
+              function validateUserType(){
+                  return userType.val() === "";
+              }
+
+              function validateEmail(){
+                  return email.val() === "";
+              }
+
+              function validateUsername(){
+                  return username.val() === "";
+              }
+
+              function validatePassword(){
+                  return password.val() === "";
+              }
+
+          });
      </script>
 @endsection
 

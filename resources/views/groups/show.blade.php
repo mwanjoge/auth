@@ -1,6 +1,7 @@
 @extends('nisimpo::layouts.app')
 
 @section('content')
+
     <div class="">
 
         <!-- Header -->
@@ -12,7 +13,6 @@
 
         <!-- Main Wrapper -->
         <div id="wrapper">
-
             <div class="content">
                 <div class="container">
                     <div class="row">
@@ -73,7 +73,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
     </div>

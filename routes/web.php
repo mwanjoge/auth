@@ -9,8 +9,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
 Route::middleware(['web'])->group(function () {
     Route::get('login', 'Nisimpo\Auth\Http\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Nisimpo\Auth\Http\Auth\LoginController@login');
+
     // your package routes
     Route::group(['namespace' => 'Nisimpo\Auth\Http\Auth'], function() {
+
         Route::post('logout', 'LoginController@logout')->name('logout');
 
         Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
@@ -37,20 +39,16 @@ Route::middleware(['web'])->group(function () {
     Route::post('assign-role-permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'givePermissionsToRole'])->name('role.permissions');
     Route::post('assign-user-role',[\Nisimpo\Auth\Http\Controllers\UserController::class,'assignUserRole'])->name('user.role');
 
-
     Route::get('groups',[\Nisimpo\Auth\Http\Controllers\GroupsManagementController::class,'index'])->name('groups.index');
     Route::get('group/{id}',[\Nisimpo\Auth\Http\Controllers\GroupsManagementController::class,'show'])->name('group.show');
     Route::post('group-create',[\Nisimpo\Auth\Http\Controllers\GroupsManagementController::class,'create'])->name('group.create');
     Route::post('assign-group-permissions',[\Nisimpo\Auth\Http\Controllers\GroupsManagementController::class,'assignGroupPermissions'])->name('group.permissions');
 
-
     Route::get('permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'permissions'])->name('permissions.index');
     Route::post('permission-add',[\Nisimpo\Auth\Http\Controllers\UserController::class,'createNewPermissions'])->name('permissions.add');
 
-
     Route::get('users',[\Nisimpo\Auth\Http\Controllers\UserController::class,'index'])->name('users.index');
     Route::get('user/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'showUser'])->name('user.show');
-
 
     Route::post('assign-user-permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'givePermissionsToUser'])->name('user.permissions');
 

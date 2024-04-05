@@ -58,19 +58,19 @@
           .margin-bottom {
               margin-bottom: 10px;
           }
-          .permission_title , .a_permission , .a_role{
+          .permission_title , .a_permission , .a_role , .check_inputs{
               display: flex;
               align-items: center;
           }
 
-          .permission_title span{
+          .permission_title  span{
               margin-left: 5px;
               font-size: 17px;
               font-weight: bold;
               padding: 0;
           }
 
-          .a_permission span{
+          .a_permission , .check_inputs span{
               margin-left: 5px;
               font-size: 15px;
               font-weight: normal;
@@ -98,6 +98,12 @@
           .error-message{
               color: red;
           }
+
+          .modal-header{
+              padding: 10px !important;
+              text-align: center;
+          }
+
 
       </style>
 
