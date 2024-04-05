@@ -49,13 +49,13 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group check_inputs">
-                                <input type="checkbox" class="form-check m-r-n-sm"/>
+                                <input type="checkbox" class="form-check m-r-n-sm" id="is_active"/>
                                 <span> Active </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group check_inputs">
-                                <input type="checkbox" class="form-check m-r-n-sm"/>
+                                <input type="checkbox" class="form-check m-r-n-sm" id="is_app_user"/>
                                 <span> App User </span>
                             </div>
                         </div>

@@ -104,6 +104,9 @@
               text-align: center;
           }
 
+          .invalid-feedback strong {
+              color: red;
+          }
 
       </style>
 
@@ -125,21 +128,6 @@
                   "toastClass": "animated fadeInDown",
               };
 
-              $('.homerDemo1').click(function (){
-                  toastr.info('Info - This is a custom Homer info notification');
-              });
-
-              $('.homerDemo2').click(function (){
-                  toastr.success('Success - This is a Homer success notification');
-              });
-
-              $('.homerDemo3').click(function (){
-                  toastr.warning('Warning - This is a Homer warning notification');
-              });
-
-              $('.homerDemo4').click(function (){
-                  toastr.error('Error - This is a Homer error notification');
-              });
           })
       </script>
       @yield("scripts")

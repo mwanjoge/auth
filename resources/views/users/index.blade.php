@@ -154,6 +154,22 @@
               const username = $("#username");
               const password = $("#password");
 
+              let isActive = false;
+              let isAppUser = false;
+
+              $(document).on("click", ".check_inputs input[type='checkbox']", function () {
+                  const data = $(this);
+                  const id = data[0].id;
+                  if( id === "is_active"){
+                      isActive = $(this).prop('checked');
+                  }
+
+                  if( id === "is_app_user"){
+                      isAppUser = $(this).prop('checked');
+                  }
+              })
+
+
               $(document).on("click","#addUserBtn", function (e){
                   e.preventDefault();
 
@@ -170,18 +186,57 @@
                   }else if( validatePassword() ){
                       password_error.show();
                   }else {
+
                       const data = {
                           "full_name" : fullName.val(),
                           "gender" : gender.val(),
                           "user_type" : userType.val(),
                           "email" : email.val(),
+                          "is_app_user" :  isAppUser,
+                          "is_active" : isActive,
                           "username" : username.val(),
                           "password" : password.val()
                       }
 
+                      $.ajax({
+                          url: "{{ route("user.create") }}",
+                          method: "POST",
+                          data: data,
+                          success: function (response) {
+                              console.log("response");
+                              console.log(response);
+                          },
+                          error: function (error) {
+                              console.log("error");
+                              console.log(error);
+                          }
+                      })
                       console.log("Data");
                       console.log(data);
                   }
+              });
+
+              $(document).on("change","#gender, #user_type ", function (){
+                  const data = $(this);
+                  console.log("Data");
+                  console.log(data);
+                  const id = data[0].id;
+                  if( id === "gender"){
+                      if( validateFullName() ){
+                          gender_error.show();
+                      }else {
+                          gender_error.hide();
+                      }
+                  }
+
+                  if( id === "user_type"){
+                      if( validateUserType() ){
+                          user_type_error.show();
+                      }else {
+                          user_type_error.hide();
+                      }
+                  }
+
               });
 
               $(document).on("keyup","#full_name, #username , #email , #password", function (){
@@ -241,6 +296,7 @@
               function validateUsername(){
                   return username.val() === "";
               }
+
 
               function validatePassword(){
                   return password.val() === "";

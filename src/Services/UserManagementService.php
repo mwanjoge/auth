@@ -17,6 +17,11 @@ class UserManagementService
         return User::find($id);
     }
 
+    public function createUser($user)
+    {
+        return User::create($user);
+    }
+
     public function RolesDatatable()
     {
         $perPage = \request()->input("length");

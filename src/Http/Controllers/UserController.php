@@ -169,8 +169,30 @@ class UserController extends Controller
     }
 
 
+    public function createUser(Request $request){
+
+        $inputs = $request->validate([
+            "full_name" => "required|string",
+            "email" => "required|string",
+            "gender" => "required|string",
+            "is_active" => "required|boolean",
+            "is_app_user" => "required|boolean",
+            "password" => "required|string",
+            "username" => "required|string",
+            "user_type" => "required|string",
+        ]);
+
+        try {
+            $isCreate = $this->userManagementService->createUser($inputs);
+        }catch (\Exception $exception){
+
+        }
+
+        return $this->successResponse();
+    }
+
     public function successResponse() {
-        return response()->json([
+        return \response()->json([
             "status" => true,
             "message" => "Successfully Added !!"
         ]);

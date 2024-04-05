@@ -49,6 +49,7 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('users',[\Nisimpo\Auth\Http\Controllers\UserController::class,'index'])->name('users.index');
     Route::get('user/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'showUser'])->name('user.show');
+    Route::post('user-create',[\Nisimpo\Auth\Http\Controllers\UserController::class,'createUser'])->name('user.create');
 
     Route::post('assign-user-permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'givePermissionsToUser'])->name('user.permissions');
 
