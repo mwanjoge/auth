@@ -17,6 +17,8 @@ return new class extends Migration
         $pivotRole = $columnNames['role_pivot_key'] ?? 'role_id';
         $pivotPermission = $columnNames['permission_pivot_key'] ?? 'permission_id';
 
+        $this->down();
+
         if (empty($tableNames)) {
             throw new \Exception('Error: config/permission.php not loaded. Run [php artisan config:clear] and try again.');
         }
@@ -28,7 +30,7 @@ return new class extends Migration
             $table->bigIncrements('id'); // permission id
             $table->string('name');       // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
-            $table->bigInteger('module_id'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->bigInteger('module_id'); // Refers to modules table;
             $table->timestamps();
 
             $table->unique(['name', 'guard_name']);
