@@ -3,7 +3,7 @@
 namespace Nisimpo\Auth\Http\Controllers;
 
 use App\Models\Member;
-use App\Models\Module;
+use Nisimpo\Auth\Models\Module;
 use http\Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\AuthorizeUserTrait;
