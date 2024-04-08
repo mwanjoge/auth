@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Module;
+use Nisimpo\Auth\Models\Module;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
