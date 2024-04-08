@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Nisimpo\Auth\Models\User;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserManagementService
 {
@@ -19,7 +21,16 @@ class UserManagementService
 
     public function createUser($user)
     {
-        return User::create($user);
+        return User::create([
+            "full_name" => $user["full_name"],
+            "email" => $user["email"] ,
+            "gender" => $user["gender"],
+            "is_active" => $user["is_active"] === "true",
+            "is_app_user" => $user["is_app_user"] === "true",
+            "password" => Hash::make($user["password"]),
+            "username" => $user["username"],
+            "user_type" => $user["user_type"],
+        ]);
     }
 
     public function RolesDatatable()

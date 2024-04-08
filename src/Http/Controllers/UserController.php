@@ -16,6 +16,7 @@ use Nisimpo\Auth\Services\UserManagementService;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Log;
 
 
 class UserController extends Controller
@@ -173,10 +174,10 @@ class UserController extends Controller
 
         $inputs = $request->validate([
             "full_name" => "required|string",
-            "email" => "required|string",
+            "email" => "required|string|unique:users,email",
             "gender" => "required|string",
-            "is_active" => "required|boolean",
-            "is_app_user" => "required|boolean",
+            "is_active" => "required|string",
+            "is_app_user" => "required|string",
             "password" => "required|string",
             "username" => "required|string",
             "user_type" => "required|string",
@@ -185,7 +186,7 @@ class UserController extends Controller
         try {
             $isCreate = $this->userManagementService->createUser($inputs);
         }catch (\Exception $exception){
-
+           Log::error("An error occurred :" . $exception->getMessage());
         }
 
         return $this->successResponse();

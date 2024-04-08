@@ -44,8 +44,11 @@ class AuthUIServiceProvider extends ServiceProvider
 //            __DIR__.'/../resources/views' => resource_path('views'),
 //        ],'resource');
 
-        $this->publishes([__DIR__.'/../public' => base_path('public')],
-            'public');
+     /*
+     $this->publishes([
+            __DIR__.'/../public' => base_path('public')
+        ], 'public');
+     */
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
@@ -53,13 +56,23 @@ class AuthUIServiceProvider extends ServiceProvider
 //            __DIR__.'/../database/migrations/' => database_path('migrations')
 //        ], 'migrations');
 
-        $this->seeding();
+        //$this->seeding();
+        $this->publishAll();
     }
 
-    public function seeding()
+    public function seeding(): void
     {
         $this->publishes([
             __DIR__.'/../database/seeders/' => database_path('seeders')
         ], 'seeders');
+    }
+
+    private function publishAll(): void
+    {
+        $this->publishes([
+            __DIR__.'/../public' => base_path('public'),
+            __DIR__.'/../config' => base_path('config'),
+            __DIR__.'/../database/seeders/' => database_path('seeders'),
+        ], 'nisimpo');
     }
 }

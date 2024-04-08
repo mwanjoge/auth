@@ -20,6 +20,7 @@ class UserSeeders extends Seeder
                 'name' => 'Test User',
                 'full_name' => 'Said khamis',
                 'password' => Hash::make("password"),
+                'email' => 'test@example.com',
                 'username' => "Duce",
                 'user_type' => "TYPE",
                 'is_app_user' => 1,

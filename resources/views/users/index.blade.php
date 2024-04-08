@@ -169,7 +169,6 @@
                   }
               })
 
-
               $(document).on("click","#addUserBtn", function (e){
                   e.preventDefault();
 
@@ -192,11 +191,14 @@
                           "gender" : gender.val(),
                           "user_type" : userType.val(),
                           "email" : email.val(),
-                          "is_app_user" :  isAppUser,
-                          "is_active" : isActive,
+                          "is_app_user" :  Boolean(isAppUser),
+                          "is_active" : Boolean(isActive),
                           "username" : username.val(),
                           "password" : password.val()
                       }
+
+                      console.log("Data");
+                      console.log(data);
 
                       $.ajax({
                           url: "{{ route("user.create") }}",
@@ -211,8 +213,7 @@
                               console.log(error);
                           }
                       })
-                      console.log("Data");
-                      console.log(data);
+
                   }
               });
 
