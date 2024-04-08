@@ -40,11 +40,12 @@ class AuthUIServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views','nisimpo');
         $this->registerRoutes();
 
-//        $this->publishes([
-//            __DIR__.'/../resources/views' => resource_path('views'),
-//        ],'resource');
+        /*        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views'),
+        ],'resource');
+*/
 
-     /*
+        /*
      $this->publishes([
             __DIR__.'/../public' => base_path('public')
         ], 'public');
@@ -52,9 +53,10 @@ class AuthUIServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-//        $this->publishes([
-//            __DIR__.'/../database/migrations/' => database_path('migrations')
-//        ], 'migrations');
+        /*        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations')
+        ], 'migrations');
+*/
 
         //$this->seeding();
         $this->publishAll();
