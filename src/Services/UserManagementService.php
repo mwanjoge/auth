@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class UserManagementService
 {
     public function findAllUsers(): Collection {
-        return User::all();
+        return User::orderByDesc("id")->get();
     }
 
     public function findUser($id) {
@@ -30,6 +30,8 @@ class UserManagementService
             "password" => Hash::make($user["password"]),
             "username" => $user["username"],
             "user_type" => $user["user_type"],
+            "userable_type" => "Entity",
+            "userable_id" => 1
         ]);
     }
 
@@ -195,12 +197,6 @@ class UserManagementService
                 ->orWhere('gender', 'like', '%' . $searchValue . '%')
                 ->orWhere('is_app_user', 'like', '%' . $searchValue . '%')
                 ->orWhere('is_active', 'like', '%' . $searchValue . '%');
-            /*->orWhereHas('ward', function ($subQuery) use ($searchValue) {
-                $subQuery->where('name', 'like', '%' . $searchValue . '%');
-            })
-            ->orWhereHas('ward.district', function ($subQuery) use ($searchValue) {
-                $subQuery->where('name', 'like', '%' . $searchValue . '%');
-            });*/
         }
 
         $totalRecordsAfterSearch = $query->count();
@@ -221,7 +217,7 @@ class UserManagementService
                     'email' => $user->email,
                     'gender' => $user->gender,
                     'action' => '<div class="dropdown">
-                                                <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
                                                 <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
                                                     <li class="dropdown-header">Actions</li>
                                                     <li>
@@ -230,7 +226,7 @@ class UserManagementService
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">
+                                                        <a href="#" class="editUser" data-id="'.$user->id.'">
                                                             <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span> Edit
                                                         </a>
                                                     </li>

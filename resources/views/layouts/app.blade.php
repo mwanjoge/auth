@@ -19,6 +19,8 @@
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/bootstrap/dist/css/bootstrap.css") }}" />
     <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.css") }}" />
     <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.css") }}" />
+    <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/ladda/dist/ladda-themeless.min.css") }}" />
+
 
 
 
@@ -47,6 +49,11 @@
 
       <script src="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.min.js") }}"></script>
       <script src="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.js") }}"></script>
+
+      <script src="{{ asset("vendor/homer/vendor/ladda/dist/spin.min.js") }}"></script>
+      <script src="{{ asset("vendor/homer/vendor/ladda/dist/ladda.min.js") }}"></script>
+      <script src="{{ asset("vendor/homer/vendor/ladda/dist/ladda.jquery.min.js") }}"></script>
+
        <!-- App scripts -->
        <script type="text/javascript" src="{{ asset("vendor/homer/scripts/homer.js") }}"></script>
 

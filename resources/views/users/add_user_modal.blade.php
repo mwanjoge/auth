@@ -2,9 +2,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add User</h4>
+                <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
+                <div class="alert alert-danger" id="errorAlert">
+                   <strong>Error</strong>
+                </div>
                 <form>
                      <div class="row">
                          <div class="col-sm-6">
@@ -80,7 +83,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="addUserBtn">Save changes</button>
+                <button class="ladda-button ladda-button-demo btn btn-primary"  data-style="zoom-in">Submit</button>
+{{--                <button type="button" class="btn btn-primary" id="addUserBtn">Save changes</button>--}}
             </div>
         </div>
     </div>

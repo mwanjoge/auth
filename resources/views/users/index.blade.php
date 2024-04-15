@@ -16,13 +16,13 @@
         <div id="wrapper">
 
             <div class="content">
-                <div class="bg-white p-sm">
-                    <div class="row ">
+                <div class="bg-white p-md">
+                    <div class="row align-item-center">
                         <div class="col-sm-6">
                             <h1 class="p-0 m-0">Users</h1>
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#userModal" style="float: right;">Add</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="" style="float: right;" id="btnAddUser">Add User</button>
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -33,7 +33,7 @@
                                         <th>S/N</th>
                                         <th>Full Name</th>
                                         <th>Email</th>
-                                        <th>Status</th>
+                                        <th>Gender</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -108,6 +108,10 @@
 @section("scripts")
      <script type="text/javascript">
           $(function (){
+
+              const errorAlert = $("#errorAlert");
+              errorAlert.hide();
+
               const tableUsers = $('#tableUsers').DataTable({
                   processing: true,
                   serverSide: true,
@@ -140,6 +144,15 @@
               const username_error = $("#username-error");
               const password_error = $("#password-error");
 
+              const userModal = $("#userModal");
+              const btnAddUser = $("#btnAddUser");
+
+
+              btnAddUser.on("click", function () {
+                  userModal.modal("show");
+                  $("#userModal .modal-title").html("Add User");
+              });
+
               full_name_error.hide();
               gender_error.hide();
               user_type_error.hide();
@@ -157,6 +170,8 @@
               let isActive = false;
               let isAppUser = false;
 
+              const addUserBtn = $('.ladda-button-demo').ladda();
+
               $(document).on("click", ".check_inputs input[type='checkbox']", function () {
                   const data = $(this);
                   const id = data[0].id;
@@ -169,7 +184,7 @@
                   }
               })
 
-              $(document).on("click","#addUserBtn", function (e){
+              addUserBtn.on("click", function (e){
                   e.preventDefault();
 
                   if( validateFullName() ){
@@ -186,6 +201,8 @@
                       password_error.show();
                   }else {
 
+                      addUserBtn.ladda( 'start' );
+
                       const data = {
                           "full_name" : fullName.val(),
                           "gender" : gender.val(),
@@ -201,16 +218,26 @@
                       console.log(data);
 
                       $.ajax({
-                          url: "{{ route("user.create") }}",
+                          url: '{{ route("user.create") }}',
                           method: "POST",
                           data: data,
                           success: function (response) {
                               console.log("response");
                               console.log(response);
+
+                              if(response.status === true){
+                                  userModal.modal("hide");
+                                  addUserBtn.ladda('stop');
+                                  tableUsers.draw();
+                              }
+
                           },
                           error: function (error) {
                               console.log("error");
-                              console.log(error);
+                              console.log(error.responseJSON.message);
+                              const anError = error.responseJSON.message;
+                              errorAlert.html(anError).show();
+                              addUserBtn.ladda('stop');
                           }
                       })
 
@@ -276,6 +303,22 @@
                           password_error.hide();
                       }
                   }
+              });
+
+
+              $(document).on("click",".editUser", function(){
+                  const userId = $(this).data("id");
+                  userModal.modal("show");
+                  $("#userModal .modal-title").html("Update User");
+
+                  $.ajax({
+                    
+                  }).done(response => {
+
+                  }).fail( error => {
+
+                  });
+
               });
 
               function validateFullName(){

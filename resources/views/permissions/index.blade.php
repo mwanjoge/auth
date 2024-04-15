@@ -17,7 +17,7 @@
             @include("nisimpo::permissions.add_permission_modal")
 
             <div class="content">
-                <div class="bg-white p-sm col">
+                <div class="bg-white p-md col">
                     <div class="row">
                         <div class="col-sm-6">
                             <h1 class="p-0 m-0">Permissions</h1>

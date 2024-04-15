@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     use AuthorizeUserTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -169,7 +170,6 @@ class UserController extends Controller
         return view('nisimpo::roles.show',compact("role","roles","modules_permissions"));
     }
 
-
     public function createUser(Request $request){
 
         $inputs = $request->validate([
@@ -185,11 +185,14 @@ class UserController extends Controller
 
         try {
             $isCreate = $this->userManagementService->createUser($inputs);
+            if ($isCreate){
+                return $this->successResponse();
+            }
         }catch (\Exception $exception){
-           Log::error("An error occurred :" . $exception->getMessage());
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
         }
-
-        return $this->successResponse();
+        return null;
     }
 
     public function successResponse() {
@@ -199,10 +202,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function failedResponse() {
-        return response()->json([
+    public function failedResponse($error) {
+        return \response()->json([
             "status" => false,
-            "message" => "Failed to save changes !!"
+            "message" => $error->getMessage()
         ]);
     }
 }
