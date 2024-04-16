@@ -5,8 +5,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'], function() {
 });
 //Route::get('','Nisimpo\Auth\Http\Controllers\UserController@index');
 
-
 Route::middleware(['web'])->group(function () {
+    
     Route::get('login', 'Nisimpo\Auth\Http\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Nisimpo\Auth\Http\Auth\LoginController@login');
 
@@ -49,7 +49,10 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('users',[\Nisimpo\Auth\Http\Controllers\UserController::class,'index'])->name('users.index');
     Route::get('user/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'showUser'])->name('user.show');
+    Route::get('user/{id}/edit',[\Nisimpo\Auth\Http\Controllers\UserController::class,'edit'])->name('user.edit');
     Route::post('user-create',[\Nisimpo\Auth\Http\Controllers\UserController::class,'createUser'])->name('user.create');
+    Route::put('user/update/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'update'])->name('user.update');
+    Route::delete('user/delete/{id}',[\Nisimpo\Auth\Http\Controllers\UserController::class,'delete'])->name('user.delete');
 
     Route::post('assign-user-permissions',[\Nisimpo\Auth\Http\Controllers\UserController::class,'givePermissionsToUser'])->name('user.permissions');
 

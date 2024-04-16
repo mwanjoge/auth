@@ -19,6 +19,27 @@ class UserManagementService
         return User::find($id);
     }
 
+    public function deleteUser($id) {
+        return User::where("id","=", $id)->delete();
+    }
+
+    public function updateUser($user, $id)  {
+        return User::updateOrCreate(
+            ["id" => $id],
+            [
+                "full_name" => $user["full_name"],
+                "email" => $user["email"] ,
+                "gender" => $user["gender"],
+                "is_active" => $user["is_active"] === "true",
+                "is_app_user" => $user["is_app_user"] === "true",
+                "password" => Hash::make($user["password"]),
+                "username" => $user["username"],
+                "user_type" => $user["user_type"],
+                "userable_type" => "Entity",
+                "userable_id" => 1
+           ]);
+    }
+
     public function createUser($user)
     {
         return User::create([
@@ -221,7 +242,7 @@ class UserManagementService
                                                 <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
                                                     <li class="dropdown-header">Actions</li>
                                                     <li>
-                                                        <a href="'. route("user.show",[ $user->id]).'">
+                                                        <a href="'. route("user.show",[ $user->id]) .'">
                                                             <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
                                                         </a>
                                                     </li>
@@ -232,7 +253,7 @@ class UserManagementService
                                                     </li>
                                                     <li role="separator" class="divider"></li>
                                                     <li>
-                                                        <a href="#">
+                                                        <a href="#" class="deleteUser" data-id="'.$user->id.'">
                                                             <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span> Delete
                                                         </a>
                                                     </li>

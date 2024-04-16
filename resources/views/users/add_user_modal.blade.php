@@ -35,8 +35,12 @@
                                 <label for="user_type">User Type</label>
                                 <select class="form-control" name="user_type" id="user_type">
                                     <option value="" selected>Select Type</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="AMCOS">AMCOS</option>
+                                    <option value="SSF">SSF</option>
+                                    <option value="BANK">BANK</option>
+                                    <option value="UNION">UNION</option>
+                                    <option value="BANK BRANCH">BANK BRANCH </option>
+                                    <option value="SYSTEM">SYSTEM</option>
                                 </select>
                                 <span class="error-message" id="user-type-error">User Type is required !!</span>
                             </div>

@@ -28,7 +28,8 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function __construct(protected AuthorizationService $authorizationService,
+    
+     public function __construct(protected AuthorizationService $authorizationService,
         protected UserManagementService $userManagementService) {
         $this->middleware('auth');
     }
@@ -36,6 +37,49 @@ class UserController extends Controller
     public function users(): View {
         $users = $this->userManagementService->findAllUsers();
         return view('nisimpo::users.index',compact('users'));
+    }
+
+    public function edit(string $id){
+       $user = $this->userManagementService->findUser($id);
+       return $user;
+    }
+
+
+    public function delete($id) {
+      try{
+        $user = $this->userManagementService->deleteUser($id);
+        if ($user){
+            return $this->successResponse();
+        }
+      }catch(\Exception $exception){
+        return $this->failedResponse($exception);
+      }
+      return null;
+    }
+
+
+    public function update(Request $request , string $id){
+
+        $inputs = $request->validate([
+            "full_name" => "required|string",
+            "email" => "required|string|unique:users,email",
+            "gender" => "required|string",
+            "is_active" => "required|string",
+            "is_app_user" => "required|string",
+            "password" => "required|string",
+            "username" => "required|string",
+            "user_type" => "required|string",
+        ]);
+        try {
+            $isUpdated = $this->userManagementService->updateUser($inputs , $id);
+            if ($isUpdated){
+                return $this->successResponse();
+            }
+        }catch (\Exception $exception){
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
+        }
+        return null;
     }
 
     public function index() {

@@ -22,7 +22,7 @@
                             <h1 class="p-0 m-0">Users</h1>
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" data-toggle="modal" data-target="" style="float: right;" id="btnAddUser">Add User</button>
+                            <button class="btn btn-success"  style="float: right;" id="btnAddUser">Add User</button>
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -50,7 +50,7 @@
                                                 <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
                                                     <li class="dropdown-header">Actions</li>
                                                     <li>
-                                                        <a href="{{ route("user.show",[$user->id]) }}">
+                                                        <a href="{{ route('user.show',[$user->id]) }}">
                                                             <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
                                                         </a>
                                                     </li>
@@ -94,7 +94,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-        -->
+                             -->
                         </div>
                     </div>
                 </div>
@@ -111,6 +111,35 @@
 
               const errorAlert = $("#errorAlert");
               errorAlert.hide();
+
+              let userId, baseURL , method = "";
+
+              const full_name_error = $("#full-name-error");
+              const gender_error = $("#gender-error");
+              const user_type_error = $("#user-type-error");
+              const email_error = $("#email-error");
+              const username_error = $("#username-error");
+              const password_error = $("#password-error");
+
+              const userModal = $("#userModal");
+              const btnAddUser = $("#btnAddUser");
+
+              full_name_error.hide();
+              gender_error.hide();
+              user_type_error.hide();
+              email_error.hide();
+              username_error.hide();
+              password_error.hide();
+
+              const fullName = $("#full_name");
+              const gender = $("#gender");
+              const userType = $("#user_type");
+              const email = $("#email");
+              const username = $("#username");
+              const password = $("#password");
+
+              let isActive = false;
+              let isAppUser = false;
 
               const tableUsers = $('#tableUsers').DataTable({
                   processing: true,
@@ -137,39 +166,18 @@
                   ],
               });
 
-              const full_name_error = $("#full-name-error");
-              const gender_error = $("#gender-error");
-              const user_type_error = $("#user-type-error");
-              const email_error = $("#email-error");
-              const username_error = $("#username-error");
-              const password_error = $("#password-error");
-
-              const userModal = $("#userModal");
-              const btnAddUser = $("#btnAddUser");
-
-
               btnAddUser.on("click", function () {
                   userModal.modal("show");
+                  
                   $("#userModal .modal-title").html("Add User");
+
+                   baseURL = "{{ route('user.create') }}";
+
+                   method = "POST";
+
               });
 
-              full_name_error.hide();
-              gender_error.hide();
-              user_type_error.hide();
-              email_error.hide();
-              username_error.hide();
-              password_error.hide();
-
-              const fullName = $("#full_name");
-              const gender = $("#gender");
-              const userType = $("#user_type");
-              const email = $("#email");
-              const username = $("#username");
-              const password = $("#password");
-
-              let isActive = false;
-              let isAppUser = false;
-
+             
               const addUserBtn = $('.ladda-button-demo').ladda();
 
               $(document).on("click", ".check_inputs input[type='checkbox']", function () {
@@ -218,8 +226,8 @@
                       console.log(data);
 
                       $.ajax({
-                          url: '{{ route("user.create") }}',
-                          method: "POST",
+                          url: baseURL,
+                          method: method,
                           data: data,
                           success: function (response) {
                               console.log("response");
@@ -297,7 +305,7 @@
                   }
 
                   if( id === "password"){
-                      if( validatePassword() ){
+                      if( validatePassword() || method === "POST"){
                           password_error.show();
                       }else {
                           password_error.hide();
@@ -307,18 +315,79 @@
 
 
               $(document).on("click",".editUser", function(){
-                  const userId = $(this).data("id");
+                  userId = $(this).data("id");
                   userModal.modal("show");
                   $("#userModal .modal-title").html("Update User");
+                  const baseUrl = "{{ route('user.edit',['id']) }}".replace("id",userId);
+                  
+                  baseURL = "{{ route('user.update',['id']) }}".replace("id",userId);
+
+                  method = "PUT";
 
                   $.ajax({
-                    
+                    url: baseUrl,
+                    method: "GET",
+                    dataType: "json",
                   }).done(response => {
+                     console.log("Response");
+                     console.log(response);
+                     console.log(response.gender);
+
+
+                     fullName.val(response.full_name);
+                     username.val(response.username);
+                     email.val(response.email);
+                     $("#gender").val(response.gender);
+                     userType.val(response.user_type);
+
+                     if( response.is_active  === "ACTIVE"){
+                        $("#is_active").prop("checked" , true);
+                     }
+
+                     if( response.is_app_user  === 1){
+                        $("#is_app_user").prop("checked" , true);
+                     }
 
                   }).fail( error => {
-
+                     console.log("error");
+                     console.log(error);
                   });
 
+              });
+
+              
+             $(document).on("click",".deleteUser" ,function () {
+                const userId = $(this).data("id");
+                swal({
+                    title: "Are you sure?",
+                    text: "Your will not be able to recover this!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false 
+                   },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: '{{ route("user.delete",["id"]) }}'.replace("id", userId),
+                                method: "DELETE",
+                                dataType: "json"
+                            }).done( response => {
+                                if(response.status === true){
+                                    swal("Deleted!", "User has been deleted.", "success");
+                                    tableUsers.draw();
+                                }
+                            }).fail( error => {
+
+                            });
+
+                        } else {
+                            swal("Cancelled", "User is safe :)", "error");
+                        }
+                    });
               });
 
               function validateFullName(){
@@ -347,6 +416,27 @@
               }
 
           });
+
+          function clearInputs() {
+             $("#full_name").val("");
+             $("#gender").val("");
+             $("#user_type").val("");
+             $("#email").val("");
+             $("#username").val("");
+             $("#password").val("");
+             $("#is_active").prop("checked" , false);
+             $("#is_app_user").prop("checked" , false);
+
+             baseURL = " ";
+             method = " ";
+          }
+
+          //var isShown = userModal.hasClass('in') || userModal.hasClass('show')
+
+          $("#userModal").on("hidden.bs.modal", function(e){
+               clearInputs();
+          });
+
      </script>
 @endsection
 

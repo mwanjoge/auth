@@ -62,14 +62,14 @@
                                               @foreach($modules_permissions as $permission)
                                                   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                                       <div class="permission_title margin-bottom" data-id="{{ $permission->id }}">
-                                                          <input type="checkbox" class="form-check m-r-n-sm" disabled/>
-                                                          <span>{{ $permission->name }}</span>
+                                                          <input type="checkbox" class="form-check m-r-n-md" disabled/>
+                                                          <span style="margin-left: 2px;;">{{ $permission->name }}</span>
                                                       </div>
                                                       @if(count($permission->permissions) > 0)
                                                           @foreach($permission->permissions as $perm)
                                                               <div class="a_permission" data-permission="{{ $perm->name }}">
-                                                                  <input type="checkbox" class="form-check m-r-n-sm" {{ $user->hasPermissionTo($perm->name) ? 'checked' : '' }}/>
-                                                                  <span>{{ $perm->name }}</span>
+                                                                  <input type="checkbox" class="form-check m-r-n-md" {{ $user->hasPermissionTo($perm->name) ? 'checked' : '' }}/>
+                                                                  <span style="margin-left: 2px;;">{{ $perm->name }}</span>
                                                               </div>
                                                           @endforeach
                                                       @endif
