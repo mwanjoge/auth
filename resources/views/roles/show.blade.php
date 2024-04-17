@@ -87,7 +87,7 @@
                 console.log(data);
 
                 $.ajax({
-                    url: "{{ route("role.permissions") }}",
+                    url: "{{ route('role.permissions') }}",
                     method: "POST",
                     dataType: "json",
                     data: JSON.stringify(data),

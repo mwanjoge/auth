@@ -2,6 +2,7 @@
 
 namespace Nisimpo\Auth\Services;
 
+use Database\Seeders\PermissionsSeeder;
 use Illuminate\Database\Eloquent\Collection;
 use Nisimpo\Auth\Models\User;
 use Spatie\Permission\Models\Permission;
@@ -19,9 +20,44 @@ class UserManagementService
         return User::find($id);
     }
 
+    public function findRole($id) {
+        return Role::find($id);
+    }
+
+
+    public function findPermission($id) {
+        return Permission::find($id);
+    }
+    
+
     public function deleteUser($id) {
         return User::where("id","=", $id)->delete();
     }
+
+    public function deleteRole($id) {
+        return Role::where("id","=", $id)->delete();
+    }
+
+
+    public function deletePermission($id) {
+        return Permission::where("id","=", $id)->delete();
+    }
+    
+    
+    public function updatePermission($role, $id)  {
+        return Permission::updateOrCreate(
+            ["id" => $id ],
+            ["name" => $role["name"]]
+        );
+    }
+
+    public function updateRole($role, $id)  {
+        return Role::updateOrCreate(
+            ["id" => $id ],
+            ["name" => $role["name"]]
+        );
+    }
+
 
     public function updateUser($user, $id)  {
         return User::updateOrCreate(
@@ -40,6 +76,7 @@ class UserManagementService
            ]);
     }
 
+
     public function createUser($user)
     {
         return User::create([
@@ -56,7 +93,9 @@ class UserManagementService
         ]);
     }
 
-    public function RolesDatatable()
+
+
+    public function rolesDatatable()
     {
         $perPage = \request()->input("length");
         $page = ($perPage !== 0)
@@ -90,27 +129,31 @@ class UserManagementService
                     'name' => $role->name,
                     'guard_name' => $role->guard_name ,
                     'action' => '<div class="dropdown">
-                                                <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
-                                                <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
-                                                    <li class="dropdown-header">Actions</li>
-                                                    <li>
-                                                        <a href="'. route("role.show",[ $role->id]).'">
-                                                            <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span> Edit
-                                                        </a>
-                                                    </li>
-                                                    <li role="separator" class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span> Delete
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>',
+                         <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
+                              <li class="dropdown-header">Actions</li>
+
+                              <li>
+                                <a href="'. route("role.show",[ $role->id]) .'">
+                                  <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
+                                </a>
+                              </li>
+
+                              <li>
+                                <a href="#" class="editRole" data-id="'. $role->id .'">
+                                    <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span> Edit
+                                </a>
+                              </li>
+
+                              <li role="separator" class="divider"></li>
+
+                              <li>
+                               <a href="#" class"deleteRole" data-id="'. $role->id .'">
+                                  <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span> Delete
+                               </a>
+                             </li>
+                       </ul>
+                    </div>',
                 ];
             }),
             'input' => [
@@ -125,6 +168,7 @@ class UserManagementService
         ]);
 
     }
+
 
     public function permissionsDatatable()
     {
@@ -161,27 +205,22 @@ class UserManagementService
                     'name' => $permission->name,
                     'guard_name' => $permission->guard_name ,
                     'action' => '<div class="dropdown">
-                                                <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
-                                                <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
-                                                    <li class="dropdown-header">Actions</li>
-                                                    <li>
-                                                        <a href="'. route("user.show",[ $permission->id]).'">
-                                                            <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span> Edit
-                                                        </a>
-                                                    </li>
-                                                    <li role="separator" class="divider"></li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span> Delete
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>',
+                            <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
+                        <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
+                                <li class="dropdown-header">Actions</li>
+                                      <li>
+                                         <a href="#" class="editPermission" data-id="'.$permission->id.'">
+                                              <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span> Edit
+                                            </a>
+                                      </li>
+                                      <li role="separator" class="divider"></li>
+                                       <li>
+                                          <a href="#" class="deletePermission" data-id="'.$permission->id.'">
+                                               <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span> Delete
+                                         </a>
+                                      </li>
+                                    </ul>
+                                </div>',
                 ];
             }),
             'input' => [

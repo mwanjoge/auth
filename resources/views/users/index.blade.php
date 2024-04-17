@@ -257,6 +257,7 @@
                   console.log("Data");
                   console.log(data);
                   const id = data[0].id;
+
                   if( id === "gender"){
                       if( validateFullName() ){
                           gender_error.show();
@@ -266,7 +267,7 @@
                   }
 
                   if( id === "user_type"){
-                      if( validateUserType() ){
+                      if(validateUserType() ){
                           user_type_error.show();
                       }else {
                           user_type_error.hide();
@@ -275,6 +276,7 @@
 
               });
 
+              
               $(document).on("keyup","#full_name, #username , #email , #password", function (){
                    const data = $(this);
                    console.log("Data");
@@ -337,7 +339,9 @@
                      fullName.val(response.full_name);
                      username.val(response.username);
                      email.val(response.email);
-                     $("#gender").val(response.gender);
+                     //$("#gender").val(response.gender).attr("selected","selected");
+
+                     gender.val(response.gender);
                      userType.val(response.user_type);
 
                      if( response.is_active  === "ACTIVE"){

@@ -25,7 +25,7 @@ class UserController extends Controller
 
     /**
      * Create a new controller instance.
-     *
+     * 
      * @return void
      */
     
@@ -34,18 +34,23 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function users(): View {
+
+    public function users(): View 
+    {
         $users = $this->userManagementService->findAllUsers();
         return view('nisimpo::users.index',compact('users'));
     }
 
-    public function edit(string $id){
+
+    public function edit(string $id)
+    {
        $user = $this->userManagementService->findUser($id);
        return $user;
     }
 
 
-    public function delete($id) {
+    public function delete($id) 
+    {
       try{
         $user = $this->userManagementService->deleteUser($id);
         if ($user){
@@ -58,8 +63,8 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request , string $id){
-
+    public function update(Request $request , string $id)
+    {
         $inputs = $request->validate([
             "full_name" => "required|string",
             "email" => "required|string|unique:users,email",
@@ -70,6 +75,7 @@ class UserController extends Controller
             "username" => "required|string",
             "user_type" => "required|string",
         ]);
+
         try {
             $isUpdated = $this->userManagementService->updateUser($inputs , $id);
             if ($isUpdated){
@@ -82,31 +88,101 @@ class UserController extends Controller
         return null;
     }
 
-    public function index() {
 
+    public function index() 
+    {
         $users = $this->userManagementService->findAllUsers();
-
         if (\request()->ajax()){
             return  $this->userManagementService->usersDatatable();
         }
-
         return view('nisimpo::users.index', compact('users'));
     }
 
-    public function roles() {
 
+    public function roles() 
+    {
         $roles = $this->findAllRoles();
-
         if (\request()->ajax()){
-            return  $this->userManagementService->RolesDatatable();
+            return  $this->userManagementService->rolesDatatable();
         }
         return view('nisimpo::roles.index', compact('roles'));
     }
 
-    public function permissions(){
+    
 
+    public function updatePermission(Request $request , string $id)
+    {
+        $inputs = $request->validate([
+            "name" => "required|string"
+        ]);
+
+        try {
+            $isUpdated = $this->userManagementService->updatePermission($inputs , $id);
+            if ($isUpdated){
+                return $this->successResponse();
+            }
+        }catch (\Exception $exception){
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
+        }
+        return null;
+    }
+
+
+    public function updateRole(Request $request , string $id)
+    {
+        $inputs = $request->validate([
+            "name" => "required|string"
+        ]);
+
+        try {
+            $isUpdated = $this->userManagementService->updateRole($inputs , $id);
+            if ($isUpdated){
+                return $this->successResponse();
+            }
+        }catch (\Exception $exception){
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
+        }
+        return null;
+    }
+
+    public function deleteRole($id)  {
+        try{
+            $role = $this->userManagementService->deleteRole($id);
+            if ($role){
+                return $this->successResponse();
+            }
+          }catch(\Exception $exception){
+            return $this->failedResponse($exception);
+          }
+          return null;
+    }
+
+    
+    public function deletePermission($id) {
+        try{
+            $role = $this->userManagementService->deletePermission($id);
+            if ($role){
+                return $this->successResponse();
+            }
+          }catch(\Exception $exception){
+            return $this->failedResponse($exception);
+          }
+          return null;
+    }
+    
+    public function editRole($id) {
+        return $this->userManagementService->findRole($id);
+    }
+
+    public function editPermission($id) {
+        return $this->userManagementService->findPermission($id);
+    }
+
+    public function permissions()
+    {
         $permissions = $this->findAllPermissions();
-
         if (\request()->ajax()){
             return  $this->userManagementService->permissionsDatatable();
         }
@@ -137,6 +213,7 @@ class UserController extends Controller
         return $this->successResponse();
     }
 
+
     public function givePermissionsToUser(Request $request)
     {
         $dataReceived  = file_get_contents("php://input");
@@ -156,6 +233,7 @@ class UserController extends Controller
         }
         return $this->successResponse();
     }
+
 
     public function assignUserRole(Request $request)
     {
@@ -177,6 +255,7 @@ class UserController extends Controller
         return $this->successResponse();
     }
 
+
     public function createNewPermissions(Request $request)
     {
         $input = $request->validate([
@@ -186,10 +265,11 @@ class UserController extends Controller
         $this->createPermissions($input["name"]);
 
         return $this->successResponse();
-
     }
 
-    public function createNewRole(Request $request){
+
+    public function createNewRole(Request $request)
+    {
         //Role should be an array
         $input = $request->validate([
             "name" => "required|string"
@@ -200,21 +280,27 @@ class UserController extends Controller
         return $this->successResponse();
     }
 
-    public function showUser(string $id){
+
+    public function showUser(string $id)
+    {
         $roles = $this->findAllRoles();
         $user = $this->userManagementService->findUser($id);
         $modules_permissions = Module::query()->with("permissions")->get();
         return view('nisimpo::users.show',compact("user","roles","modules_permissions"));
     }
 
-    public function showRole(string $id){
+
+    public function showRole(string $id)
+    {
         $roles = $this->findAllRoles();
         $role = $this->authorizationService->findRole($id);
         $modules_permissions = Module::query()->with("permissions")->get();
         return view('nisimpo::roles.show',compact("role","roles","modules_permissions"));
     }
 
-    public function createUser(Request $request){
+    
+    public function createUser(Request $request)
+    {
 
         $inputs = $request->validate([
             "full_name" => "required|string",
@@ -239,14 +325,18 @@ class UserController extends Controller
         return null;
     }
 
-    public function successResponse() {
+
+    public function successResponse() 
+    {
         return \response()->json([
             "status" => true,
             "message" => "Successfully Added !!"
         ]);
     }
 
-    public function failedResponse($error) {
+
+    public function failedResponse($error) 
+    {
         return \response()->json([
             "status" => false,
             "message" => $error->getMessage()
