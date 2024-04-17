@@ -339,9 +339,9 @@
                      fullName.val(response.full_name);
                      username.val(response.username);
                      email.val(response.email);
-                     //$("#gender").val(response.gender).attr("selected","selected");
+                     $("#gender option[value='" + response.gender + "']").prop('selected', true);
 
-                     gender.val(response.gender);
+                     //gender.val(response.gender);
                      userType.val(response.user_type);
 
                      if( response.is_active  === "ACTIVE"){

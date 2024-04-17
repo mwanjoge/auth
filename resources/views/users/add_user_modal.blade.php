@@ -21,9 +21,9 @@
                              <div class="form-group">
                                  <label for="gender">Gender</label>
                                  <select class="form-control" name="gender" id="gender">
-                                     <option value="" selected>Select Gender</option>
-                                     <option value="Male">Male</option>
-                                     <option value="Female">Female</option>
+                                     <option value="" selected> Select Gender </option>
+                                     <option value="MALE">Male</option>
+                                     <option value="FEMALE">Female</option>
                                  </select>
                                  <span class="error-message" id="gender-error">Gender Name is required !!</span>
                              </div>
