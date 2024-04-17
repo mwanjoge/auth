@@ -17,13 +17,13 @@
             @include("nisimpo::permissions.add_permission_modal")
 
             <div class="content">
-                <div class="bg-white p-sm col">
+                <div class="bg-white p-md col">
                     <div class="row">
                         <div class="col-sm-6">
                             <h1 class="p-0 m-0">Permissions</h1>
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#permissionModal" style="float: right;">Add</button>
+                            <button class="btn btn-success" style="float: right;" id="btnAddPermissions">Add</button>
                         </div>
                     </div>
                     <div class="table-responsive w-100">
@@ -106,6 +106,8 @@
                 ],
             });
 
+            let baseURL , method = "";
+
             $(document).on("keyup", "#permission", function (){
                  const permission = $(this).val();
                  if(permission !== ""){
@@ -113,15 +115,53 @@
                  }
             });
 
+            $(document).on("click", "#btnAddPermissions", function(){
+                 permissionModal.modal("show");
+                 baseURL = '{{ route("permissions.add") }}';
+                 method = "POST";
+            });
+
+            $(document).on("click", ".editPermission", function(){
+                 permissionModal.modal("show");
+                 
+                 const id = $(this).data("id");
+                 const url = "{{ route('permission.edit',['id']) }}".replace("id", id);
+
+                 method = "PUT";
+
+                 baseURL = "{{ route('permission.update',['id']) }}".replace("id", id);
+
+                 $.ajax({
+                       url: url,
+                       method: "GET",
+                       dataType: "json",
+                       success: function (response){
+                           console.log("response");
+                           console.log(response);
+                           if(response !== null){
+                               permissionModal.modal("show");
+                               $("#permission").val(response.name);
+                           }
+                       },
+                       error: function (error){
+                           console.log("error");
+                           console.log(error);
+                           const anError = error.responseJSON.message;
+                           console.log(anError);
+                           toastr.error(anError);
+                       }
+                   });
+
+            });
+
             $(document).on("click","#addPermissionBtn", function (){
                 if(name.val() === ""){
                     roleError.show();
                 }else{
-                    const url = "{{ route("permissions.add") }}";
 
                     $.ajax({
-                        url: url,
-                        method: "POST",
+                        url: baseURL,
+                        method: method,
                         dataType: "json",
                         data: {
                             "name" : name.val()
@@ -146,7 +186,52 @@
                 }
             });
 
-        })
+            $(document).on("click",".deletePermission", function(){
+                const id = $(this).data("id");
+
+                method = "DELETE";
+
+                baseURL = "{{ route('permission.destroy',['id']) }}".replace("id", id);
+
+                 swal({
+                    title: "Are you sure?",
+                    text: "Your will not be able to recover this!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false 
+                   },function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: baseURL,
+                                method: method,
+                                dataType: "json"
+                            }).done( response => {
+                                if(response.status === true){
+                                    swal("Deleted!", "Role has been deleted.", "success");
+                                    tableUsers.draw();
+                                }
+                            }).fail( error => {
+
+                            });
+
+                        } else {
+                            swal("Cancelled", "User is safe :)", "error");
+                        }
+                    }
+                );
+            });
+
+            $(document).on("hidden.bs.modal", function(){
+               baseURL = " ";
+               method = " ";
+               name.val(" ");
+            });
+
+        });
     </script>
 @endsection
 

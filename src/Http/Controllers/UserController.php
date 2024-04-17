@@ -3,7 +3,7 @@
 namespace Nisimpo\Auth\Http\Controllers;
 
 use App\Models\Member;
-use App\Models\Module;
+use Nisimpo\Auth\Models\Module;
 use http\Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\AuthorizeUserTrait;
@@ -16,51 +16,173 @@ use Nisimpo\Auth\Services\UserManagementService;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Log;
 
 
 class UserController extends Controller
 {
     use AuthorizeUserTrait;
+
     /**
      * Create a new controller instance.
-     *
+     * 
      * @return void
      */
-    public function __construct(protected AuthorizationService $authorizationService,
+    
+     public function __construct(protected AuthorizationService $authorizationService,
         protected UserManagementService $userManagementService) {
         $this->middleware('auth');
     }
 
-    public function users(): View {
+
+    public function users(): View 
+    {
         $users = $this->userManagementService->findAllUsers();
         return view('nisimpo::users.index',compact('users'));
     }
 
-    public function index() {
 
+    public function edit(string $id)
+    {
+       $user = $this->userManagementService->findUser($id);
+       return $user;
+    }
+
+
+    public function delete($id) 
+    {
+      try{
+        $user = $this->userManagementService->deleteUser($id);
+        if ($user){
+            return $this->successResponse();
+        }
+      }catch(\Exception $exception){
+        return $this->failedResponse($exception);
+      }
+      return null;
+    }
+
+
+    public function update(Request $request , string $id)
+    {
+        $inputs = $request->validate([
+            "full_name" => "required|string",
+            "email" => "required|string|unique:users,email",
+            "gender" => "required|string",
+            "is_active" => "required|string",
+            "is_app_user" => "required|string",
+            "password" => "required|string",
+            "username" => "required|string",
+            "user_type" => "required|string",
+        ]);
+
+        try {
+            $isUpdated = $this->userManagementService->updateUser($inputs , $id);
+            if ($isUpdated){
+                return $this->successResponse();
+            }
+        }catch (\Exception $exception){
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
+        }
+        return null;
+    }
+
+
+    public function index() 
+    {
         $users = $this->userManagementService->findAllUsers();
-
         if (\request()->ajax()){
             return  $this->userManagementService->usersDatatable();
         }
-
         return view('nisimpo::users.index', compact('users'));
     }
 
-    public function roles() {
 
+    public function roles() 
+    {
         $roles = $this->findAllRoles();
-
         if (\request()->ajax()){
-            return  $this->userManagementService->RolesDatatable();
+            return  $this->userManagementService->rolesDatatable();
         }
         return view('nisimpo::roles.index', compact('roles'));
     }
 
-    public function permissions(){
+    
 
+    public function updatePermission(Request $request , string $id)
+    {
+        $inputs = $request->validate([
+            "name" => "required|string"
+        ]);
+
+        try {
+            $isUpdated = $this->userManagementService->updatePermission($inputs , $id);
+            if ($isUpdated){
+                return $this->successResponse();
+            }
+        }catch (\Exception $exception){
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
+        }
+        return null;
+    }
+
+
+    public function updateRole(Request $request , string $id)
+    {
+        $inputs = $request->validate([
+            "name" => "required|string"
+        ]);
+
+        try {
+            $isUpdated = $this->userManagementService->updateRole($inputs , $id);
+            if ($isUpdated){
+                return $this->successResponse();
+            }
+        }catch (\Exception $exception){
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
+        }
+        return null;
+    }
+
+    public function deleteRole($id)  {
+        try{
+            $role = $this->userManagementService->deleteRole($id);
+            if ($role){
+                return $this->successResponse();
+            }
+          }catch(\Exception $exception){
+            return $this->failedResponse($exception);
+          }
+          return null;
+    }
+
+    
+    public function deletePermission($id) {
+        try{
+            $role = $this->userManagementService->deletePermission($id);
+            if ($role){
+                return $this->successResponse();
+            }
+          }catch(\Exception $exception){
+            return $this->failedResponse($exception);
+          }
+          return null;
+    }
+    
+    public function editRole($id) {
+        return $this->userManagementService->findRole($id);
+    }
+
+    public function editPermission($id) {
+        return $this->userManagementService->findPermission($id);
+    }
+
+    public function permissions()
+    {
         $permissions = $this->findAllPermissions();
-
         if (\request()->ajax()){
             return  $this->userManagementService->permissionsDatatable();
         }
@@ -91,6 +213,7 @@ class UserController extends Controller
         return $this->successResponse();
     }
 
+
     public function givePermissionsToUser(Request $request)
     {
         $dataReceived  = file_get_contents("php://input");
@@ -110,6 +233,7 @@ class UserController extends Controller
         }
         return $this->successResponse();
     }
+
 
     public function assignUserRole(Request $request)
     {
@@ -131,6 +255,7 @@ class UserController extends Controller
         return $this->successResponse();
     }
 
+
     public function createNewPermissions(Request $request)
     {
         $input = $request->validate([
@@ -140,10 +265,11 @@ class UserController extends Controller
         $this->createPermissions($input["name"]);
 
         return $this->successResponse();
-
     }
 
-    public function createNewRole(Request $request){
+
+    public function createNewRole(Request $request)
+    {
         //Role should be an array
         $input = $request->validate([
             "name" => "required|string"
@@ -154,32 +280,66 @@ class UserController extends Controller
         return $this->successResponse();
     }
 
-    public function showUser(string $id){
+
+    public function showUser(string $id)
+    {
         $roles = $this->findAllRoles();
         $user = $this->userManagementService->findUser($id);
         $modules_permissions = Module::query()->with("permissions")->get();
         return view('nisimpo::users.show',compact("user","roles","modules_permissions"));
     }
 
-    public function showRole(string $id){
+
+    public function showRole(string $id)
+    {
         $roles = $this->findAllRoles();
         $role = $this->authorizationService->findRole($id);
         $modules_permissions = Module::query()->with("permissions")->get();
         return view('nisimpo::roles.show',compact("role","roles","modules_permissions"));
     }
 
+    
+    public function createUser(Request $request)
+    {
 
-    public function successResponse() {
-        return response()->json([
+        $inputs = $request->validate([
+            "full_name" => "required|string",
+            "email" => "required|string|unique:users,email",
+            "gender" => "required|string",
+            "is_active" => "required|string",
+            "is_app_user" => "required|string",
+            "password" => "required|string",
+            "username" => "required|string",
+            "user_type" => "required|string",
+        ]);
+
+        try {
+            $isCreate = $this->userManagementService->createUser($inputs);
+            if ($isCreate){
+                return $this->successResponse();
+            }
+        }catch (\Exception $exception){
+            return $this->failedResponse($exception);
+            //Log::error("An error occurred :" . $exception->getMessage());
+        }
+        return null;
+    }
+
+
+    public function successResponse() 
+    {
+        return \response()->json([
             "status" => true,
             "message" => "Successfully Added !!"
         ]);
     }
 
-    public function failedResponse() {
-        return response()->json([
+
+    public function failedResponse($error) 
+    {
+        return \response()->json([
             "status" => false,
-            "message" => "Failed to save changes !!"
+            "message" => $error->getMessage()
         ]);
     }
 }

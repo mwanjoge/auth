@@ -19,6 +19,8 @@
     <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/bootstrap/dist/css/bootstrap.css") }}" />
     <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.css") }}" />
     <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.css") }}" />
+    <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/ladda/dist/ladda-themeless.min.css") }}" />
+
 
 
 
@@ -47,6 +49,11 @@
 
       <script src="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.min.js") }}"></script>
       <script src="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.js") }}"></script>
+
+      <script src="{{ asset("vendor/homer/vendor/ladda/dist/spin.min.js") }}"></script>
+      <script src="{{ asset("vendor/homer/vendor/ladda/dist/ladda.min.js") }}"></script>
+      <script src="{{ asset("vendor/homer/vendor/ladda/dist/ladda.jquery.min.js") }}"></script>
+
        <!-- App scripts -->
        <script type="text/javascript" src="{{ asset("vendor/homer/scripts/homer.js") }}"></script>
 
@@ -58,19 +65,19 @@
           .margin-bottom {
               margin-bottom: 10px;
           }
-          .permission_title , .a_permission , .a_role{
+          .permission_title , .a_permission , .a_role , .check_inputs{
               display: flex;
               align-items: center;
           }
 
-          .permission_title span{
+          .permission_title  span{
               margin-left: 5px;
               font-size: 17px;
               font-weight: bold;
               padding: 0;
           }
 
-          .a_permission span{
+          .a_permission , .check_inputs span{
               margin-left: 5px;
               font-size: 15px;
               font-weight: normal;
@@ -99,6 +106,15 @@
               color: red;
           }
 
+          .modal-header{
+              padding: 10px !important;
+              text-align: center;
+          }
+
+          .invalid-feedback strong {
+              color: red;
+          }
+
       </style>
 
       <script type="text/javascript">
@@ -119,21 +135,6 @@
                   "toastClass": "animated fadeInDown",
               };
 
-              $('.homerDemo1').click(function (){
-                  toastr.info('Info - This is a custom Homer info notification');
-              });
-
-              $('.homerDemo2').click(function (){
-                  toastr.success('Success - This is a Homer success notification');
-              });
-
-              $('.homerDemo3').click(function (){
-                  toastr.warning('Warning - This is a Homer warning notification');
-              });
-
-              $('.homerDemo4').click(function (){
-                  toastr.error('Error - This is a Homer error notification');
-              });
           })
       </script>
       @yield("scripts")

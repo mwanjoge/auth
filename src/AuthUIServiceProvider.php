@@ -39,19 +39,42 @@ class AuthUIServiceProvider extends ServiceProvider
         Route::mixin(new AuthRouteMethods);
         $this->loadViewsFrom(__DIR__.'/../resources/views','nisimpo');
         $this->registerRoutes();
-//        $this->publishes([
-//            __DIR__.'/../resources/views' => resource_path('views'),
-//        ],'resource');
 
-        $this->publishes([
+        /*        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views'),
+        ],'resource');
+*/
+
+        /*
+     $this->publishes([
             __DIR__.'/../public' => base_path('public')
         ], 'public');
+     */
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-//        $this->publishes([
-//            __DIR__.'/../database/migrations/' => database_path('migrations')
-//        ], 'migrations');
+        /*        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations')
+        ], 'migrations');
+*/
 
+        //$this->seeding();
+        $this->publishAll();
+    }
+
+    public function seeding(): void
+    {
+        $this->publishes([
+            __DIR__.'/../database/seeders/' => database_path('seeders')
+        ], 'seeders');
+    }
+
+    private function publishAll(): void
+    {
+        $this->publishes([
+            __DIR__.'/../public' => base_path('public'),
+            __DIR__.'/../config' => base_path('config'),
+            __DIR__.'/../database/seeders/' => database_path('seeders'),
+        ], 'nisimpo');
     }
 }

@@ -5,8 +5,9 @@ namespace Nisimpo\Auth\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;
+use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Module extends Model
+class Module extends Eloquent
 {
     use HasFactory;
 

@@ -14,6 +14,7 @@ class AuthorizationService
     {
         return Permission::query()->where("name",$permission);
     }
+
     /**
      * Create new role in the form of array
      * @param array $roles array of roles names

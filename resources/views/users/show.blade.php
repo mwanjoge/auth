@@ -21,7 +21,7 @@
                               <div class="hpanel">
                                   <div class="panel-body">
                                       <div style="display: flex; flex-direction: column; align-items: center;">
-                                          <img src="{{ asset("vendor/homer/images/profile.jpg") }}" class="img-circle" alt="logo">
+                                          <img src="{{ asset('vendor/homer/images/profile.jpg') }}" class="img-circle" alt="logo">
                                           <h3 class="p-0 m-0 text-center">{{ $user->full_name }}</h3>
                                           <h4 class="p-0 m-0 text-success">{{ $user->is_active ? "ACTIVE" : "INACTIVE" }} </h4>
                                           <div class="row mt-3">
@@ -62,14 +62,14 @@
                                               @foreach($modules_permissions as $permission)
                                                   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                                       <div class="permission_title margin-bottom" data-id="{{ $permission->id }}">
-                                                          <input type="checkbox" class="form-check m-r-n-sm" disabled/>
-                                                          <span>{{ $permission->name }}</span>
+                                                          <input type="checkbox" class="form-check m-r-n-md" disabled/>
+                                                          <span style="margin-left: 2px;;">{{ $permission->name }}</span>
                                                       </div>
                                                       @if(count($permission->permissions) > 0)
                                                           @foreach($permission->permissions as $perm)
                                                               <div class="a_permission" data-permission="{{ $perm->name }}">
-                                                                  <input type="checkbox" class="form-check m-r-n-sm" {{ $user->hasPermissionTo($perm->name) ? 'checked' : '' }}/>
-                                                                  <span>{{ $perm->name }}</span>
+                                                                  <input type="checkbox" class="form-check m-r-n-md" {{ $user->hasPermissionTo($perm->name) ? 'checked' : '' }}/>
+                                                                  <span style="margin-left: 2px;;">{{ $perm->name }}</span>
                                                               </div>
                                                           @endforeach
                                                       @endif
@@ -108,7 +108,7 @@
                  };
 
                  $.ajax({
-                     url: "{{ route("user.permissions") }}",
+                     url: '{{ route("user.permissions") }}',
                      method: "POST",
                      dataType: "json",
                      data: JSON.stringify(data),
@@ -122,8 +122,10 @@
                          const anError = error.responseJSON.message;
                          toastr.error(anError);
                      }
-                 })
+                 });
+
              })
+
 
              $(document).on("click", ".a_role input[type='checkbox']", function () {
                  const permission = $(this).closest('.a_role').data("role");
@@ -137,7 +139,7 @@
                  };
 
                  $.ajax({
-                     url: "{{ route("user.role") }}",
+                     url: '{{ route("user.role") }}',
                      method: "POST",
                      dataType: "json",
                      data: JSON.stringify(data),
@@ -151,7 +153,8 @@
                          const anError = error.responseJSON.message;
                          toastr.error(anError);
                      }
-                 })
+                 });
+                 
              })
          });
 
