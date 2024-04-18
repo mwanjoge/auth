@@ -36,12 +36,14 @@
 
 </head>
 <body class="light-skin blank">
+    @if(Auth::check())
     <!-- Header -->
     @include("commons.navbar")
 
     <!-- Navigation -->
 
     @include("commons.sidebar")
+    @endif
     @yield('content')
 
        <script type="text/javascript" src="{{ asset("vendor/homer/vendor/jquery/dist/jquery.min.js") }}"></script>
