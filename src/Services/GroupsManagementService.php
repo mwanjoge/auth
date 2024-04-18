@@ -7,7 +7,8 @@ use Nisimpo\Auth\Models\User;
 
 class GroupsManagementService {
 
-    public function findAllGroups(): Collection {
+    public function findAllGroups(): \Illuminate\Database\Eloquent\Collection
+    {
         return Module::all();
     }
 
@@ -15,13 +16,15 @@ class GroupsManagementService {
         return Module::find($id);
     }
 
-    public function createGroup($data) {
+    public function createGroup($data): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+    {
         return Module::query()->create([
             "name" => $data["name"]
         ]);
     }
 
-    public function findGroupWithPermissions($id) {
+    public function findGroupWithPermissions($id): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder|null
+    {
         return Module::query()
             ->where("id","=", $id)
             ->with("permissions")

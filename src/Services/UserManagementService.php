@@ -28,37 +28,27 @@ class UserManagementService
     public function findPermission($id) {
         return Permission::find($id);
     }
-    
-
     public function deleteUser($id) {
         return User::where("id","=", $id)->delete();
     }
-
     public function deleteRole($id) {
         return Role::where("id","=", $id)->delete();
     }
-
-
     public function deletePermission($id) {
         return Permission::where("id","=", $id)->delete();
     }
-    
-    
     public function updatePermission($role, $id)  {
         return Permission::updateOrCreate(
             ["id" => $id ],
             ["name" => $role["name"]]
         );
     }
-
     public function updateRole($role, $id)  {
         return Role::updateOrCreate(
             ["id" => $id ],
             ["name" => $role["name"]]
         );
     }
-
-
     public function updateUser($user, $id)  {
         return User::updateOrCreate(
             ["id" => $id],
@@ -75,8 +65,6 @@ class UserManagementService
                 "userable_id" => 1
            ]);
     }
-
-
     public function createUser($user)
     {
         return User::create([
@@ -92,9 +80,6 @@ class UserManagementService
             "userable_id" => 1
         ]);
     }
-
-
-
     public function rolesDatatable()
     {
         $perPage = \request()->input("length");
@@ -168,11 +153,8 @@ class UserManagementService
         ]);
 
     }
-
-
     public function permissionsDatatable()
     {
-
         $perPage = \request()->input("length");
         $page = ($perPage !== 0)
             ? (\request()->input("start") / $perPage + 1)
@@ -237,16 +219,13 @@ class UserManagementService
 
     public function usersDatatable()
     {
-
         $perPage = \request()->input("length");
         $page = ($perPage !== 0)
             ? (\request()->input("start") / $perPage + 1)
             : 1;
 
         $searchValue = request()->input('search.value');
-
         $query = User::query();
-
         $totalRecordsBeforeSearch = User::count();
 
         if (!empty($searchValue)) {
@@ -260,7 +239,6 @@ class UserManagementService
         }
 
         $totalRecordsAfterSearch = $query->count();
-
         $users = $query->skip(($page - 1) * $perPage)
             ->take($perPage)
             ->get();
