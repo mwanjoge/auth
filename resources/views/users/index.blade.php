@@ -1,15 +1,7 @@
-@extends('nisimpo::layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="">
-
-        <!-- Header -->
-        @include("nisimpo::common.navbar")
-
-        <!-- Navigation -->
-
-        @include("nisimpo::common.sidebar")
-
         @include("nisimpo::users.add_user_modal")
 
         <!-- Main Wrapper -->
@@ -168,7 +160,7 @@
 
               btnAddUser.on("click", function () {
                   userModal.modal("show");
-                  
+
                   $("#userModal .modal-title").html("Add User");
 
                    baseURL = "{{ route('user.create') }}";
@@ -177,7 +169,7 @@
 
               });
 
-             
+
               const addUserBtn = $('.ladda-button-demo').ladda();
 
               $(document).on("click", ".check_inputs input[type='checkbox']", function () {
@@ -276,7 +268,7 @@
 
               });
 
-              
+
               $(document).on("keyup","#full_name, #username , #email , #password", function (){
                    const data = $(this);
                    console.log("Data");
@@ -321,7 +313,7 @@
                   userModal.modal("show");
                   $("#userModal .modal-title").html("Update User");
                   const baseUrl = "{{ route('user.edit',['id']) }}".replace("id",userId);
-                  
+
                   baseURL = "{{ route('user.update',['id']) }}".replace("id",userId);
 
                   method = "PUT";
@@ -359,7 +351,7 @@
 
               });
 
-              
+
              $(document).on("click",".deleteUser" ,function () {
                 const userId = $(this).data("id");
                 swal({
@@ -371,7 +363,7 @@
                     confirmButtonText: "Yes, delete it!",
                     cancelButtonText: "No, cancel plx!",
                     closeOnConfirm: false,
-                    closeOnCancel: false 
+                    closeOnCancel: false
                    },
                     function (isConfirm) {
                         if (isConfirm) {

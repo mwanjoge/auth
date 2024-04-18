@@ -1,14 +1,7 @@
-@extends('nisimpo::layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="">
-
-        <!-- Header -->
-        @include("nisimpo::common.navbar")
-
-        <!-- Navigation -->
-
-        @include("nisimpo::common.sidebar")
 
         @include("nisimpo::groups.add_group_modal")
 

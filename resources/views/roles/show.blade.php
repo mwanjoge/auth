@@ -1,18 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="">
-
-        <!-- Header -->
-        @include("commons.navbar")
-
-        <!-- Navigation -->
-
-        @include("commons.sidebar")
-
         <!-- Main Wrapper -->
         <div id="wrapper">
-
             <div class="content">
                 <div class="container">
                     <div class="row">
@@ -31,7 +21,6 @@
                             <div class="hpanel">
                                 <div class="panel-body">
                                     <div class="panel-title">ASSIGN PERMISSIONS</div>
-
                                     <div class="row" style="margin-top: 15px;">
                                         @if( $modules_permissions != null)
                                             @if(count($modules_permissions) > 0)
@@ -46,7 +35,7 @@
                                                                 <div class="a_permission" data-permission="{{ $perm->name }}">
                                                                     <input type="checkbox" class="form-check m-r-n-sm" {{ $role->hasPermissionTo($perm->name) ? 'checked' : '' }}/>
                                                                     <div class="nav-divider"></div>
-                                                                    <span>{{ $perm->name }}</span>
+                                                                    <span style="padding-left: 3px;">{{ $perm->name }}</span>
                                                                 </div>
                                                             @endforeach
                                                         @endif
@@ -56,23 +45,19 @@
                                             @endif
                                         @endif
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 @endsection
 
 @section("scripts")
     <script type="text/javascript">
         $(function () {
-
             $(document).on("click", ".a_permission input[type='checkbox']", function () {
                 const permission = $(this).closest('.a_permission').data("permission");
                 const role_id = "{{ $role->id }}";
@@ -83,8 +68,6 @@
                     "role_id": role_id,
                     "isChecked": isChecked
                 };
-
-                console.log(data);
 
                 $.ajax({
                     url: "{{ route('role.permissions') }}",
@@ -104,7 +87,6 @@
                 })
             })
         });
-
     </script>
 @endsection
 

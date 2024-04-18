@@ -36,8 +36,13 @@
 
 </head>
 <body class="light-skin blank">
+    <!-- Header -->
+    @include("commons.navbar")
 
-      @yield('content')
+    <!-- Navigation -->
+
+    @include("commons.sidebar")
+    @yield('content')
 
        <script type="text/javascript" src="{{ asset("vendor/homer/vendor/jquery/dist/jquery.min.js") }}"></script>
        <script type="text/javascript" src="{{ asset("vendor/homer/vendor/jquery-ui/jquery-ui.min.js") }}"></script>

@@ -4,7 +4,7 @@
     </div>
     <div id="logo" class="light-version">
         <span>
-            Homer Theme
+            Nisimpo | Auth
         </span>
     </div>
     <nav role="navigation">

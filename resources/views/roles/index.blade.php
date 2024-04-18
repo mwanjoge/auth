@@ -1,14 +1,7 @@
-@extends('nisimpo::layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="">
-
-        <!-- Header -->
-        @include("nisimpo::common.navbar")
-
-        <!-- Navigation -->
-
-        @include("nisimpo::common.sidebar")
 
         @include("nisimpo::roles.add_role_modal")
 
@@ -93,7 +86,7 @@
 
 
             $(document).on("click", ".deleteRole" , function(){
-                 
+
                  alert("Data Delete");
 
                 //const id = $(this).data("id");
@@ -111,7 +104,7 @@
                 //     confirmButtonText: "Yes, delete it!",
                 //     cancelButtonText: "No, cancel plx!",
                 //     closeOnConfirm: false,
-                //     closeOnCancel: false 
+                //     closeOnCancel: false
                 //    },function (isConfirm) {
                 //         if (isConfirm) {
                 //             $.ajax({
@@ -132,7 +125,7 @@
                 //         }
                 //     }
                 // );
-                  
+
               });
 
 

@@ -60,7 +60,7 @@ class UiCommand extends Command
         Presets\Bootstrap::install();
 
         $this->components->info('Bootstrap scaffolding installed successfully.');
-        $this->components->warn('Please run [npm install && npm run dev] to compile your fresh scaffolding.');
+        //$this->components->warn('Please run [npm install && npm run dev] to compile your fresh scaffolding.');
     }
 
     /**
