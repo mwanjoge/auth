@@ -73,8 +73,10 @@ class AuthUIServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../public' => base_path('public'),
-            __DIR__.'/../config' => base_path('config'),
-            __DIR__.'/../database/seeders/' => database_path('seeders'),
+            __DIR__.'/../resources/views/layouts' => base_path('resources/views/layouts'),
+            __DIR__.'/../resources/views/common' => base_path('resources/views/commons'),
+           // __DIR__.'/../config' => base_path('config'),
+           // __DIR__.'/../database/seeders/' => database_path('seeders'),
         ], 'nisimpo');
     }
 }

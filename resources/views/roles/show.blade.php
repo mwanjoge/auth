@@ -1,14 +1,14 @@
-@extends('nisimpo::layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="">
 
         <!-- Header -->
-        @include("nisimpo::common.navbar")
+        @include("commons.navbar")
 
         <!-- Navigation -->
 
-        @include("nisimpo::common.sidebar")
+        @include("commons.sidebar")
 
         <!-- Main Wrapper -->
         <div id="wrapper">

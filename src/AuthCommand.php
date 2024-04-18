@@ -32,14 +32,16 @@ class AuthCommand extends Command
      * @var array
      */
     protected $views = [
-        'auth/login.stub' => 'auth/login.blade.php',
-        'auth/passwords/confirm.stub' => 'auth/passwords/confirm.blade.php',
-        'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
-        'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
-        'auth/register.stub' => 'auth/register.blade.php',
-        'auth/verify.stub' => 'auth/verify.blade.php',
-        'home.stub' => 'home.blade.php',
-        'layouts/app.stub' => 'layouts/app.blade.php',
+//        'auth/login.stub' => 'auth/login.blade.php',
+//        'auth/passwords/confirm.stub' => 'auth/passwords/confirm.blade.php',
+//        'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
+//        'auth/passwords/reset.stub' => 'auth/passwords/reset.blade.php',
+//        'auth/register.stub' => 'auth/register.blade.php',
+//        'auth/verify.stub' => 'auth/verify.blade.php',
+//        'home.stub' => 'home.blade.php',
+        'layouts/app.blade.php' => 'layouts/app.blade.php',
+        'layouts/app-master.blade.php' => 'layouts/app-master.blade.php',
+        //'layouts/app.stub' => 'layouts/app.blade.php',
     ];
 
     /**
@@ -65,7 +67,7 @@ class AuthCommand extends Command
         if (! $this->option('views')) {
             //$this->exportBackend();
         }
-
+        $this->exportSeeder();
         $this->components->info('Authentication scaffolding generated successfully.');
     }
 
@@ -161,6 +163,40 @@ class AuthCommand extends Command
                 base_path('routes/auth_routes.php')
             );
         }
+    }
+
+    public function exportSeeder(): void
+    {
+//        file_put_contents(
+//            base_path('database/seeders/DatabaseSeeder.php'),
+//            file_get_contents(__DIR__.'/../database/seeders/DatabaseSeeder.stub'),
+//            FILE_APPEND
+//        );
+
+        copy(
+            __DIR__.'/../database/seeders/DatabaseSeeder.stub',
+            base_path('database/seeders/DatabaseSeeder.php')
+        );
+
+        copy(
+            __DIR__.'/../database/seeders/ModulesSeeder.php',
+            base_path('database/seeders/ModulesSeeder.php')
+        );
+
+        copy(
+            __DIR__.'/../database/seeders/PermissionsSeeder.php',
+            base_path('database/seeders/PermissionsSeeder.php')
+        );
+
+        copy(
+            __DIR__.'/../database/seeders/RolesSeeder.php',
+            base_path('database/seeders/RolesSeeder.php')
+        );
+
+        copy(
+            __DIR__.'/../database/seeders/UserSeeder.php',
+            base_path('database/seeders/UserSeeder.php')
+        );
     }
 
     /**

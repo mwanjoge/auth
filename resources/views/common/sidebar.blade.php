@@ -53,19 +53,6 @@
                     <li><a href="{{ route("permissions.index") }}">Permissions</a></li>
                 </ul>
             </li>
-
-            <li>
-                <a href="#"><span class="nav-label">Procurement</span><span class="fa arrow"></span> </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="">Warehouse</a></li>
-                    <li><a href="">Requisition</a></li>
-                    <li><a href="">Purchase Order</a></li>
-                    <li><a href="">Stock Entry</a></li>
-                    <li><a href="">Loading Order</a></li>
-                </ul>
-            </li>
-
-
         </ul>
     </div>
 </aside>

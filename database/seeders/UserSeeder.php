@@ -2,25 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Employee;
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Modules\Procurement\App\Models\Entity;
 
-class UserSeeders extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void {
-        $user = User::query()->updateOrCreate(
+        $user = \Nisimpo\Auth\Models\User::query()->updateOrCreate(
             [
                 'name' => 'Test User',
-                'full_name' => 'Said khamis',
+                'full_name' => 'Test User',
                 'password' => Hash::make("password"),
-                'email' => 'test@example.com',
+                'email' => 'test@bizytech.com',
                 'username' => "Duce",
                 'user_type' => "TYPE",
                 'is_app_user' => 1,
