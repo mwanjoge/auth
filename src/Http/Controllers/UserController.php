@@ -25,17 +25,17 @@ class UserController extends Controller
 
     /**
      * Create a new controller instance.
-     * 
+     *
      * @return void
      */
-    
+
      public function __construct(protected AuthorizationService $authorizationService,
         protected UserManagementService $userManagementService) {
         $this->middleware('auth');
     }
 
 
-    public function users(): View 
+    public function users(): View
     {
         $users = $this->userManagementService->findAllUsers();
         return view('nisimpo::users.index',compact('users'));
@@ -49,7 +49,7 @@ class UserController extends Controller
     }
 
 
-    public function delete($id) 
+    public function delete($id)
     {
       try{
         $user = $this->userManagementService->deleteUser($id);
@@ -89,17 +89,18 @@ class UserController extends Controller
     }
 
 
-    public function index() 
+    public function index()
     {
         $users = $this->userManagementService->findAllUsers();
-        if (\request()->ajax()){
-            return  $this->userManagementService->usersDatatable();
-        }
-        return view('nisimpo::users.index', compact('users'));
+//        if (request()->ajax()){
+//            return  $this->userManagementService->findAllUsers();
+//        }
+        $view = config('nisimpo_auth.theme').'.users.index';
+        return view('nisimpo::'.$view, compact('users'));
     }
 
 
-    public function roles() 
+    public function roles()
     {
         $roles = $this->findAllRoles();
         if (\request()->ajax()){
@@ -108,7 +109,7 @@ class UserController extends Controller
         return view('nisimpo::roles.index', compact('roles'));
     }
 
-    
+
 
     public function updatePermission(Request $request , string $id)
     {
@@ -159,7 +160,7 @@ class UserController extends Controller
           return null;
     }
 
-    
+
     public function deletePermission($id) {
         try{
             $role = $this->userManagementService->deletePermission($id);
@@ -171,7 +172,7 @@ class UserController extends Controller
           }
           return null;
     }
-    
+
     public function editRole($id) {
         return $this->userManagementService->findRole($id);
     }
@@ -298,7 +299,7 @@ class UserController extends Controller
         return view('nisimpo::roles.show',compact("role","roles","modules_permissions"));
     }
 
-    
+
     public function createUser(Request $request)
     {
 
@@ -326,7 +327,7 @@ class UserController extends Controller
     }
 
 
-    public function successResponse() 
+    public function successResponse()
     {
         return \response()->json([
             "status" => true,
@@ -335,7 +336,7 @@ class UserController extends Controller
     }
 
 
-    public function failedResponse($error) 
+    public function failedResponse($error)
     {
         return \response()->json([
             "status" => false,

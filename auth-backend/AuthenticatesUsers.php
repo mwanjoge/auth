@@ -15,13 +15,14 @@ trait AuthenticatesUsers
     /**
      * Show the application's login form.
      *
-     * @return \Illuminate\View\View
      */
     public function showLoginForm()
     {
+        $view = config('nisimpo_auth.theme').'.auth.login';
         if(\Illuminate\Support\Facades\Route::has('auth.login'))
-            return view('auth.login');
-        return view('nisimpo::auth.login');
+            return view($view);
+
+        return view('nisimpo::'.$view);
     }
 
     /**

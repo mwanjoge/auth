@@ -13,60 +13,27 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/fontawesome/css/font-awesome.css") }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/metisMenu/dist/metisMenu.css") }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/animate.css/animate.css") }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/vendor/bootstrap/dist/css/bootstrap.css") }}" />
-    <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.css") }}" />
-    <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.css") }}" />
-    <link rel="stylesheet" href="{{ asset("vendor/homer/vendor/ladda/dist/ladda-themeless.min.css") }}" />
-
-
-
-
-    {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">--}}
-
-    <!-- App styles -->
-    <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css") }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/fonts/pe-icon-7-stroke/css/helper.css") }}" />
-
-    <link type="text/css" rel="stylesheet" href="{{ asset("vendor/homer/styles/style.css") }}" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
-
+    @include('layouts.'.config('nisimpo_auth.theme').'_css_links')
 
 </head>
-<body class="light-skin blank">
+<body class="light-skin blank pt-5">
     @if(Auth::check())
     <!-- Header -->
-    @include("commons.navbar")
-
+    @include("nisimpo::".config('nisimpo_auth.theme').".common.navbar")
     <!-- Navigation -->
-
-    @include("commons.sidebar")
     @endif
-    @yield('content')
+    <div class="page-wrapper">
+        <div class="page-body pt-4">
+            <div class="container-xl">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 
-       <script type="text/javascript" src="{{ asset("vendor/homer/vendor/jquery/dist/jquery.min.js") }}"></script>
-       <script type="text/javascript" src="{{ asset("vendor/homer/vendor/jquery-ui/jquery-ui.min.js") }}"></script>
-       <script type="text/javascript" src="{{ asset("vendor/homer/vendor/slimScroll/jquery.slimscroll.min.js") }}"></script>
-       <script type="text/javascript" src="{{ asset("vendor/homer/vendor/bootstrap/dist/js/bootstrap.min.js") }}"></script>
-       <script type="text/javascript" src="{{ asset("vendor/homer/vendor/metisMenu/dist/metisMenu.min.js") }}"></script>
-       <script type="text/javascript" src="{{ asset("vendor/homer/vendor/iCheck/icheck.min.js") }}"></script>
-       <script type="text/javascript" src="{{ asset("vendor/homer/vendor/sparkline/index.js") }}"></script>
-
-      <script src="{{ asset("vendor/homer/vendor/sweetalert/lib/sweet-alert.min.js") }}"></script>
-      <script src="{{ asset("vendor/homer/vendor/toastr/build/toastr.min.js") }}"></script>
-
-      <script src="{{ asset("vendor/homer/vendor/ladda/dist/spin.min.js") }}"></script>
-      <script src="{{ asset("vendor/homer/vendor/ladda/dist/ladda.min.js") }}"></script>
-      <script src="{{ asset("vendor/homer/vendor/ladda/dist/ladda.jquery.min.js") }}"></script>
-
-       <!-- App scripts -->
-       <script type="text/javascript" src="{{ asset("vendor/homer/scripts/homer.js") }}"></script>
-
-{{--       <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>--}}
-       <script type="text/javascript" src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.5/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/fc-5.0.0/fh-4.0.1/r-3.0.2/rr-1.5.0/sc-2.4.1/sl-2.0.1/sr-1.4.1/datatables.min.js"></script>
       <style type="text/css">
 
           .margin-bottom {

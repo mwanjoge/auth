@@ -110,9 +110,7 @@ class UserManagementService
             'recordsFiltered' => $totalRecordsAfterSearch,
             'data' => $roles->map(function ($role) {
                 return [
-                    'id' => $role->id,
-                    'name' => $role->name,
-                    'guard_name' => $role->guard_name ,
+                    $this->getCl($role),
                     'action' => '<div class="dropdown">
                          <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
                             <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
@@ -152,6 +150,15 @@ class UserManagementService
             ],
         ]);
 
+    }
+    public function getCl($record){
+        return json_decode(
+            [
+                'id' => $record->id,
+                'name' => $record->name,
+                'guard_name' => $record->guard_name ,
+            ]
+        );
     }
     public function permissionsDatatable()
     {

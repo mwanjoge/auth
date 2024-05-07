@@ -3,7 +3,7 @@
 @section('content')
     <div class="">
 
-        @include("nisimpo::groups.add_group_modal")
+        @include("nisimpo::homer.groups.add_group_modal")
 
         <!-- Main Wrapper -->
         <div id="wrapper">
@@ -15,7 +15,9 @@
                             <h1 class="p-0 m-0">Groups (Modules) </h1>
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#groupsModel" style="float: right;">Add</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#groupsModel"
+                                    style="float: right;">Add
+                            </button>
                         </div>
                     </div>
                     <div class="table-responsive w-100 m-t-n-sm">
@@ -43,7 +45,7 @@
 @section("scripts")
     <script type="text/javascript">
 
-        $(function (){
+        $(function () {
 
             const roleError = $("#role-error");
             const groupsModel = $("#groupsModel");
@@ -72,11 +74,11 @@
                 ],
             });
 
-            $(document).on("click","#addGroupBtn", function (){
+            $(document).on("click", "#addGroupBtn", function () {
                 const name = $("input[name='group']");
-                if(name.val() === ""){
+                if (name.val() === "") {
                     roleError.show();
-                }else{
+                } else {
                     const url = "{{ route("group.create") }}";
 
                     $.ajax({
@@ -84,18 +86,18 @@
                         method: "POST",
                         dataType: "json",
                         data: {
-                            "name" : name.val()
+                            "name": name.val()
                         },
-                        success: function (response){
+                        success: function (response) {
                             console.log("response");
                             console.log(response);
-                            if(response.status === true){
+                            if (response.status === true) {
                                 tableUsers.draw();
                                 groupsModel.modal("hide");
                                 toastr.success(response.message);
                             }
                         },
-                        error: function (error){
+                        error: function (error) {
                             console.log("error");
                             console.log(error);
                             const anError = error.responseJSON.message;
