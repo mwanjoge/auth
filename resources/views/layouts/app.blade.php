@@ -20,6 +20,7 @@
     @if(Auth::check())
     <!-- Header -->
     @include("nisimpo::".config('nisimpo_auth.theme').".common.navbar")
+    @include("nisimpo::".config('nisimpo_auth.theme').".common.sidebar")
     <!-- Navigation -->
     @endif
     <div class="page-wrapper">
