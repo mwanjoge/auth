@@ -92,9 +92,9 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userManagementService->findAllUsers();
-//        if (request()->ajax()){
-//            return  $this->userManagementService->findAllUsers();
-//        }
+        if (request()->ajax()){
+            return  $this->userManagementService->usersDatatable();
+        }
         $view = config('nisimpo_auth.theme').'.users.index';
         return view('nisimpo::'.$view, compact('users'));
     }
