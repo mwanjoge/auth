@@ -65,7 +65,7 @@ class AuthCommand extends Command
         //$this->exportViews();
 
         if (! $this->option('views')) {
-            //$this->exportBackend();
+            $this->exportBackend();
         }
         $this->exportSeeder();
         $this->call("vendor:publish",[

@@ -106,7 +106,8 @@ class UserController extends Controller
         if (\request()->ajax()){
             return  $this->userManagementService->rolesDatatable();
         }
-        return view('nisimpo::roles.index', compact('roles'));
+        $view = 'nisimpo::'.config('nisimpo_auth.theme').'.roles.index';
+        return view($view, compact('roles'));
     }
 
 

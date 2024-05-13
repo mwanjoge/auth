@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="">
-        @include("nisimpo::users.add_user_modal")
+        @include("nisimpo::".config('theme').".users.add_user_modal")
 
         <!-- Main Wrapper -->
         <div id="wrapper">

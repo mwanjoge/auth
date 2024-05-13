@@ -3,7 +3,7 @@
 @section('content')
     <div class="">
 
-        @include("nisimpo::roles.add_role_modal")
+        @include("nisimpo::".config('nisimpo_auth.theme').".roles.add_role_modal")
 
         <!-- Main Wrapper -->
         <div id="wrapper">

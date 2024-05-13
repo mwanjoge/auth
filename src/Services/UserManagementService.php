@@ -82,9 +82,9 @@ class UserManagementService
     }
     public function rolesDatatable()
     {
-        $perPage = \request()->input("length");
+        $perPage = request()->input("length");
         $page = ($perPage !== 0)
-            ? (\request()->input("start") / $perPage + 1)
+            ? (request()->input("start") / $perPage + 1)
             : 1;
 
         $searchValue = request()->input('search.value');
@@ -109,35 +109,7 @@ class UserManagementService
             "recordsTotal" => $totalRecordsBeforeSearch,
             'recordsFiltered' => $totalRecordsAfterSearch,
             'data' => $roles->map(function ($role) {
-                return [
-                    $this->getCl($role),
-                    'action' => '<div class="dropdown">
-                         <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
-                            <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
-                              <li class="dropdown-header">Actions</li>
-
-                              <li>
-                                <a href="'. route("role.show",[ $role->id]) .'">
-                                  <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
-                                </a>
-                              </li>
-
-                              <li>
-                                <a href="#" class="editRole" data-id="'. $role->id .'">
-                                    <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span> Edit
-                                </a>
-                              </li>
-
-                              <li role="separator" class="divider"></li>
-
-                              <li>
-                               <a href="#" class"deleteRole" data-id="'. $role->id .'">
-                                  <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span> Delete
-                               </a>
-                             </li>
-                       </ul>
-                    </div>',
-                ];
+                return $this->getCl($role);
             }),
             'input' => [
                 'draw' => \request()->input("draw"),
@@ -152,13 +124,38 @@ class UserManagementService
 
     }
     public function getCl($record){
-        return json_decode(
-            [
-                'id' => $record->id,
-                'name' => $record->name,
-                'guard_name' => $record->guard_name ,
-            ]
-        );
+        return[
+            'id' => $record->id,
+            'name' => $record->name,
+            'guard_name' => $record->guard_name,
+
+            'action' => '<div class="dropdown">
+                         <span class="glyphicon glyphicon-option-vertical" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" aria-hidden="true"></span>
+                            <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
+                              <li class="dropdown-header">Actions</li>
+
+                              <li>
+                                <a href="'. route("role.show",[ $record->id]) .'">
+                                  <span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span> View
+                                </a>
+                              </li>
+
+                              <li>
+                                <a href="#" class="editRole" data-id="'. $record->id .'">
+                                    <span class="glyphicon glyphicon-edit text-primary" aria-hidden="true"></span> Edit
+                                </a>
+                              </li>
+
+                              <li role="separator" class="divider"></li>
+
+                              <li>
+                               <a href="#" class"deleteRole" data-id="'. $record->id .'">
+                                  <span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span> Delete
+                               </a>
+                             </li>
+                       </ul>
+                    </div>'
+        ];
     }
     public function permissionsDatatable()
     {
